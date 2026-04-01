@@ -1,37 +1,77 @@
 import { motion } from 'motion/react';
 import { Calendar } from 'lucide-react';
-
+// centros de dist, grandes marcas, china
 export function Timeline() {
   const milestones = [
     {
-      year: '1980',
+      year: '1981',
       title: 'Fundação',
-      description: 'Início das atividades com foco em peças para motocicletas.',
+      description: 'Primeira Revenda Lagoa Moto.',
     },
     {
-      year: '1995',
-      title: 'Expansão Nacional',
-      description: 'Abertura de centros de distribuição em diferentes estados.',
+      year: '1988',
+      title: 'Expansão Inicial',
+      description: 'Inicio da LM COMERCIAL e distribuidora em Lagoa da Prata.',
     },
     {
-      year: '2005',
+      year: '1996',
       title: 'Mercado Internacional',
-      description: 'Parcerias com fornecedores de mais de 10 países.',
+      description: 'Primeira Licença de comércio exterior da LM Comercial.',
     },
     {
-      year: '2015',
-      title: 'Modernização',
-      description: 'Implementação de sistema logístico integrado e automatizado.',
+      year: '2004',
+      title: 'Primeira expansão ',
+      description: 'Início das operações no Espírto Santo.',
     },
     {
-      year: '2020',
-      title: 'Linha Bicicletas',
-      description: 'Inclusão de acessórios e equipamentos para ciclismo.',
+      year: '2006',
+      title: 'High One',
+      description: 'Primeiro produto da marca própria High One.',
+    },
+    {
+      year: '2007',
+      title: 'Segunda expansão',
+      description: 'Primeira operação no Sul do Pais e Lançamento da X11.',
+    },
+    {
+      year: '2008',
+      title: 'SCUD',
+      description: 'Primeiro produto da marca própria SCUD.',
+    },
+    {
+      year: '2009',
+      title: 'WG SPORTS',
+      description: 'Primeiro produto da marca própria WG SPORTS.',
+    },
+    {
+      year: '2010',
+      title: 'WG SPORTS',
+      description: 'Início das operações em São Paulo.',
+    },
+    {
+      year: '2014',
+      title: 'WG SPORTS',
+      description: 'Início das operações no Centro Oeste.',
+    },
+    {
+      year: '2019',
+      title: 'WG SPORTS',
+      description: 'Início das operações no Nordeste.',
+    },
+    {
+      year: '2023',
+      title: 'WG SPORTS',
+      description: 'Primeiro produto da marca própria Panther e Comander.',
+    },
+      {
+      year: '2024',
+      title: 'WG SPORTS',
+      description: 'Início das operações no Norte.',
     },
     {
       year: '2026',
       title: 'Inovação Contínua',
-      description: 'Líder em distribuição com tecnologia de ponta e sustentabilidade.',
+      description: 'Início das operações na China.',
     },
   ];
 
