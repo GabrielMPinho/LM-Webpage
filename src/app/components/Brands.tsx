@@ -151,10 +151,15 @@ export function Brands() {
         <div className="space-y-3 overflow-hidden lg:space-y-4">
           <div className="space-y-2.5">
             <div className="flex items-center justify-between gap-4">
-              <div className="inline-flex items-center gap-3 rounded-full border border-[#3565AD]/18 bg-white/70 px-4 py-2 text-sm font-semibold text-[#0C2041] backdrop-blur-sm">
+              <a
+                href="https://portal.lmmoto.com.br/glstorefront/glmotos/pt/BRL/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 rounded-full border border-[#3565AD]/18 bg-white/70 px-4 py-2 text-sm font-semibold text-[#0C2041] backdrop-blur-sm transition-all duration-300 hover:border-[#3565AD]/30 hover:bg-white/86 hover:shadow-[0_14px_34px_rgba(12,32,65,0.08)]"
+              >
                 <MotoOutline className="h-4 w-4 text-[#3565AD]" />
                 Marcas de Moto
-              </div>
+              </a>
             </div>
 
             <div className="overflow-hidden">
@@ -175,10 +180,15 @@ export function Brands() {
 
           <div className="space-y-2.5">
             <div className="flex items-center justify-between gap-4">
-              <div className="inline-flex items-center gap-3 rounded-full border border-[#3565AD]/18 bg-white/70 px-4 py-2 text-sm font-semibold text-[#0C2041] backdrop-blur-sm">
+              <a
+                href="https://portal.lmbike.com.br/glstorefront/glbikes/pt/BRL/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-3 rounded-full border border-[#3565AD]/18 bg-white/70 px-4 py-2 text-sm font-semibold text-[#0C2041] backdrop-blur-sm transition-all duration-300 hover:border-[#3565AD]/30 hover:bg-white/86 hover:shadow-[0_14px_34px_rgba(12,32,65,0.08)]"
+              >
                 <Bike className="h-4 w-4 text-[#3565AD]" strokeWidth={1.8} />
                 Marcas de Bike
-              </div>
+              </a>
             </div>
 
             <div className="overflow-hidden">

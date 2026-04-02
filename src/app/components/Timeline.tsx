@@ -113,7 +113,7 @@ const rows = [
   },
   {
     items: milestones.slice(10, 14),
-    popupSides: ['bottom', 'bottom', 'bottom', 'bottom'],
+    popupSides: ['top', 'top', 'top', 'bottom'],
   },
 ] as const;
 
@@ -134,7 +134,7 @@ const popupOverrides: Record<string, PopupPlacement> = {
   },
   '2006': {
     cardClasses:
-      'left-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
+      'left-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] translate-x-2 translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0',
     connectorClasses:
       'left-[calc(50%+0.9rem)] bottom-[calc(50%+0.9rem)] h-px w-9 rotate-[-34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
     yearOnTop: false,
@@ -155,10 +155,10 @@ const popupOverrides: Record<string, PopupPlacement> = {
   },
   '2019': {
     cardClasses:
-      'right-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
+      'left-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
     connectorClasses:
-      'right-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[-34deg] origin-right bg-gradient-to-l from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: true,
+      'left-[calc(50%+0.9rem)] bottom-[calc(50%+0.9rem)] h-px w-9 rotate-[-34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
+    yearOnTop: false,
   },
   '2026': {
     cardClasses:
@@ -168,6 +168,15 @@ const popupOverrides: Record<string, PopupPlacement> = {
     yearOnTop: true,
   },
 };
+
+const ajustes: Record<string, string> = {
+  '2006': 'translate-y-9',
+  '2014': 'translate-y-12',
+  '2019': 'translate-y-4',
+  '2023': 'translate-y-5',
+  '2024': 'translate-y-5',
+  '2026': 'translate-y-5',
+  };
 
 function getPopupHorizontalPosition(index: number, total: number) {
   if (index === 0) {
@@ -275,8 +284,9 @@ export function Timeline() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: rowIndex * 0.08 + itemIndex * 0.06 }}
-                        className="group relative isolate min-h-0 min-w-0"
-                      >
+                        className={`group relative isolate min-h-0 min-w-0 ${
+                          ajustes[milestone.year] || ''
+                        }`}                      >
                         <div
                           className={`absolute left-1/2 -translate-x-1/2 text-center ${
                             placement.yearOnTop ? 'top-2' : 'bottom-2'

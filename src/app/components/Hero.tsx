@@ -1,5 +1,28 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight, Bike, Zap } from 'lucide-react';
+
+function MotoOutline({
+  className = '',
+}: {
+  className?: string;
+}) {
+  return (
+    <svg
+      viewBox="0 0 64 64"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        d="M19 45a7 7 0 1 1 0 0.1M49 45a7 7 0 1 1 0 0.1M26 27h10l5 8h8M28 27l-5 8M36 23h6l4 8M30 35h11M23 35h-4"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -12,9 +35,8 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative flex h-screen items-center justify-center overflow-hidden"
     >
-      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -29,16 +51,15 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/88 via-[#17355e]/66 to-[#3565AD]/40" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="flex items-center justify-center gap-2 mb-6"
+          className="mt-10 flex items-center justify-center gap-2"
         >
           <Zap className="text-[#ffffffb0]" size={24} />
-          <span className="text-[#ffffffb0] uppercase tracking-wider">
+          <span className="uppercase tracking-wider text-[#ffffffb0]">
             Mais de 45 anos de experiência
           </span>
         </motion.div>
@@ -47,7 +68,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+          className="mb-6 text-5xl font-bold leading-tight text-white md:text-7xl lg:text-8xl"
         >
           Somos apaixonados
           <br />
@@ -60,7 +81,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto"
+          className="mx-auto mb-12 max-w-3xl text-xl text-white/80 md:text-2xl"
         >
           Desde 1981 revolucionando o mercado de 2 rodas. Distribuidora de
           bicipeças, motopeças e acessórios para ciclistas e motociclistas,
@@ -71,24 +92,65 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <button
             onClick={() => scrollToSection('sobre')}
-            className="group px-8 py-4 bg-gradient-to-r from-[#3565AD] to-[#326BB4] text-white rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+            className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
             Conheça a LM
             <ArrowRight
-              className="group-hover:translate-x-1 transition-transform"
+              className="transition-transform group-hover:translate-x-1"
               size={20}
             />
           </button>
           <button
             onClick={() => scrollToSection('marcas')}
-            className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full border-2 border-white/30 hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+            className="rounded-full border-2 border-white/30 bg-white/10 px-8 py-4 text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20"
           >
             Nossas Marcas
           </button>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="mt-8 flex flex-col items-center gap-3"
+        >
+          <span className="text-xs uppercase tracking-[0.34em] text-white/58">
+            Acesse nossos e-commerces
+          </span>
+
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="https://portal.lmbike.com.br/glstorefront/glbikes/pt/BRL/"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex min-w-[220px] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-6 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)]"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18">
+                <Bike size={18} strokeWidth={1.8} />
+              </span>
+              <span className="text-sm font-semibold tracking-[0.06em]">
+                E-commerce Bike
+              </span>
+            </a>
+
+            <a
+              href="https://portal.lmmoto.com.br/glstorefront/glmotos/pt/BRL/"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex min-w-[220px] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-6 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)]"
+            >
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18">
+                <MotoOutline className="h-[30px] w-[30px] -translate-y-[2px] -translate-x-[3px]" />
+              </span>
+              <span className="text-sm font-semibold tracking-[0.06em]">
+                E-commerce Moto
+              </span>
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
