@@ -181,6 +181,10 @@ const ajustes: Record<string, string> = {
   '2026': 'translate-y-5',
   };
 
+const stackingOverrides: Record<string, string> = {
+  '2008': 'z-40',
+};
+
 function getPopupHorizontalPosition(index: number, total: number) {
   if (index === 0) {
     return 'left-0';
@@ -289,7 +293,8 @@ export function Timeline() {
                         transition={{ delay: rowIndex * 0.08 + itemIndex * 0.06 }}
                         className={`group relative isolate min-h-0 min-w-0 ${
                           ajustes[milestone.year] || ''
-                        }`}                      >
+                        } ${stackingOverrides[milestone.year] || ''}`}
+                      >
                         <div
                           className={`absolute left-1/2 -translate-x-1/2 text-center ${
                             placement.yearOnTop ? 'top-2' : 'bottom-2'
