@@ -171,6 +171,9 @@ const popupOverrides: Record<string, PopupPlacement> = {
 
 const ajustes: Record<string, string> = {
   '2006': 'translate-y-9',
+  '2008': 'translate-y-3',
+  '2009': 'translate-y-3',
+  '2010': 'translate-y-2',
   '2014': 'translate-y-12',
   '2019': 'translate-y-4',
   '2023': 'translate-y-5',
