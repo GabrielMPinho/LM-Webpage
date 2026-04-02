@@ -144,14 +144,28 @@ const popupOverrides: Record<string, PopupPlacement> = {
       'left-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
     connectorClasses:
       'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: true,
+    yearOnTop: false,
+  },
+  '2008': {
+    cardClasses:
+      'left-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
+    connectorClasses:
+      'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
+    yearOnTop: false,
+  },
+  '2009': {
+    cardClasses:
+      'left-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
+    connectorClasses:
+      'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
+    yearOnTop: false,
   },
   '2010': {
     cardClasses:
       'left-1/2 top-[calc(50%+2.3rem)] -translate-x-1/2 -translate-y-2 group-hover:translate-y-0',
     connectorClasses:
       'left-1/2 top-[calc(50%+0.9rem)] h-6 w-px -translate-x-1/2 bg-gradient-to-b from-[#3565AD]/0 via-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: true,
+    yearOnTop: false,
   },
   '2014': {
     cardClasses:
@@ -172,7 +186,7 @@ const popupOverrides: Record<string, PopupPlacement> = {
       'left-[calc(50%+2.1rem)] top-1/2 -translate-y-1/2 translate-x-2 group-hover:translate-x-0',
     connectorClasses:
       'left-[calc(50%+0.9rem)] top-1/2 h-px w-8 -translate-y-1/2 bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: true,
+    yearOnTop: false,
   },
 };
 
@@ -346,11 +360,11 @@ export function Timeline() {
                           initial={{ opacity: 0, y: 18 }}
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          transition={{ delay: rowIndex * 0.08 + itemIndex * 0.06 }}
-                          className={`group relative isolate min-h-0 min-w-0 ${
-                            ajustes[milestone.year] || ''
-                          } ${stackingOverrides[milestone.year] || ''}`}
-                        >
+                        transition={{ delay: rowIndex * 0.08 + itemIndex * 0.06 }}
+                        className={`group relative isolate min-h-0 min-w-0 ${
+                          ajustes[milestone.year] || ''
+                        } ${stackingOverrides[milestone.year] || ''} hover:z-[80]`}
+                      >
                           <div
                             className={`absolute left-1/2 -translate-x-1/2 text-center ${
                               placement.yearOnTop ? 'top-2' : 'bottom-2'
