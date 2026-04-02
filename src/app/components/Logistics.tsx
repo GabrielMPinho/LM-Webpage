@@ -84,7 +84,7 @@ export function Logistics() {
             transition={{ duration: 0.8 }}
             className="order-1 lg:order-2"
           >
-            <span className="mb-3 block uppercase tracking-wider text-[#3565AD]">
+            <span className="mb-3 block uppercase tracking-wider text-[#497ecf]">
               Nossa Força
             </span>
             <h2 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">

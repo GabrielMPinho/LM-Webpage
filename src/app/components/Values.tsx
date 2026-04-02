@@ -73,7 +73,7 @@ export function Values() {
             Nossa Essência
           </span>
           <h2 className="mb-6 text-4xl font-bold text-[#0C2041] md:text-5xl">
-            Valores que Nos Movem
+            Valores que nos movem
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-600">
             Princípios fundamentais que guiam cada decisão da nossa empresa nos

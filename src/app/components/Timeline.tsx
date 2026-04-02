@@ -146,6 +146,13 @@ const popupOverrides: Record<string, PopupPlacement> = {
       'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
     yearOnTop: true,
   },
+  '2010': {
+    cardClasses:
+      'left-1/2 top-[calc(50%+2.3rem)] -translate-x-1/2 -translate-y-2 group-hover:translate-y-0',
+    connectorClasses:
+      'left-1/2 top-[calc(50%+0.9rem)] h-6 w-px -translate-x-1/2 bg-gradient-to-b from-[#3565AD]/0 via-[#3565AD]/28 to-[#3565AD]/0',
+    yearOnTop: true,
+  },
   '2014': {
     cardClasses:
       'right-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',

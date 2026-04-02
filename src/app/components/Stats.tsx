@@ -11,9 +11,22 @@ const stats = [
 
 const distributionCenters = [
   { code: 'WNO', label: 'Pará', left: '55%', top: '24%' },
-  { code: 'WCO', label: 'Goiás', left: '62%', top: '55%' },
+  {
+    code: 'WCO',
+    label: 'Goiás',
+    left: '62%',
+    top: '55%',
+    popupClassName:
+      'lg:-translate-x-[92%] lg:-translate-y-[3.35rem] lg:mt-0',
+  },
   { code: 'WNE', label: 'Pernambuco', left: '88%', top: '37%' },
-  { code: 'WSP', label: 'São Paulo', left: '65%', top: '70%' },
+  {
+    code: 'WSP',
+    label: 'São Paulo',
+    left: '65%',
+    top: '70%',
+    popupClassName: 'lg:-translate-x-[108%] lg:-mt-3',
+  },
   { code: 'WSUL', label: 'Santa Catarina', left: '56%', top: '84%' },
   { code: 'MB', label: 'Espírito Santo', left: '78%', top: '62%' },
   { code: 'LM', label: 'Lagoa da Prata (MG)', left: '71%', top: '64%' },
@@ -166,7 +179,11 @@ export function Stats() {
                       <span className="relative flex h-3.5 w-3.5 items-center justify-center rounded-full border border-white/70 bg-[#DDEBFF] shadow-[0_0_18px_rgba(111,168,255,0.75)] sm:h-4 sm:w-4">
                         <span className="h-1.5 w-1.5 rounded-full bg-[#0C2041]" />
                       </span>
-                      <span className="pointer-events-none absolute left-1/2 top-full mt-3 hidden w-max -translate-x-1/2 rounded-full border border-white/15 bg-[#08172e]/[0.88] px-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-white/90 opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-100 lg:block">
+                      <span
+                        className={`pointer-events-none absolute left-1/2 top-full mt-3 hidden w-max -translate-x-1/2 rounded-full border border-white/15 bg-[#08172e]/[0.88] px-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-white/90 opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-100 lg:block ${
+                          center.popupClassName ?? ''
+                        }`}
+                      >
                         {center.code} | {center.label}
                       </span>
                     </motion.button>
