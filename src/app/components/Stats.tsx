@@ -101,7 +101,7 @@ export function Stats() {
           viewport={{ once: true }}
           className="mb-8 text-center lg:mb-12"
         >
-          <span className="mb-4 block uppercase tracking-wider text-[#3565AD]">
+          <span className="mb-4 block uppercase tracking-wider text-[#497ecf]">
             Nossos Números
           </span>
           <h2 className="text-3xl font-bold text-white sm:text-4xl md:text-5xl">
@@ -127,7 +127,7 @@ export function Stats() {
                   Cobertura Nacional
                 </span>
                 <h3 className="mt-3 text-lg font-bold text-white sm:text-xl">
-                  7 centros no Brasil
+                  Nossos centros de distribuição no Brasil
                 </h3>
               </div>
 
