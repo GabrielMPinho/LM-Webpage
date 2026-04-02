@@ -17,9 +17,13 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Column 1 - About */}
           <div>
-            <img
-              src="./logoFooter.png"
-            />
+            <div className="relative mb-6 flex h-56 w-[250px] items-center overflow-hidden md:h-[5.8rem] md:w-[270px]">
+              <img
+                src="/logoFooter.png"
+                alt="LM"
+                className="absolute left-1/2 top-1/2 h-[400%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+              />
+            </div>
             <p className="text-white/70 mb-6 leading-relaxed">
               Mais de 45 anos conectando o Brasil ao mundo das duas rodas com
               excelência e confiabilidade.
@@ -102,11 +106,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="text-[#3565AD] flex-shrink-0 mt-1" size={18} />
-                <span className="text-white/70">São Paulo, SP - Brasil</span>
+                <span className="text-white/70">R. Min. Orozimbo Nonato, 102 - Vila da Serra, Nova Lima - MG, 34006-053</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="text-[#3565AD] flex-shrink-0 mt-1" size={18} />
-                <span className="text-white/70">+55 (11) 3000-0000</span>
+                <span className="text-white/70">0800 970 4044</span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="text-[#3565AD] flex-shrink-0 mt-1" size={18} />
