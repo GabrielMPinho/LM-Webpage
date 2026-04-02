@@ -35,7 +35,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex h-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-24 pb-10 md:h-screen md:pt-0 md:pb-0"
     >
       <div className="absolute inset-0 z-0">
         <video
@@ -51,12 +51,12 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/88 via-[#17355e]/66 to-[#3565AD]/40" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 text-center md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mt-10 flex items-center justify-center gap-2"
+          className="flex items-center justify-center gap-2 md:mt-10"
         >
           <Zap className="text-[#ffffffb0]" size={24} />
           <span className="uppercase tracking-wider text-[#ffffffb0]">
@@ -68,7 +68,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6 text-5xl font-bold leading-tight text-white md:text-7xl lg:text-8xl"
+          className="mb-5 text-[2.8rem] font-bold leading-[1.02] text-white sm:text-5xl md:mb-6 md:text-7xl lg:text-8xl"
         >
           Somos apaixonados
           <br />
@@ -81,7 +81,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mx-auto mb-12 max-w-3xl text-xl text-white/80 md:text-2xl"
+          className="mx-auto mb-9 max-w-[19rem] text-base leading-relaxed text-white/82 sm:max-w-2xl sm:text-lg md:mb-12 md:max-w-3xl md:text-2xl"
         >
           Desde 1981 revolucionando o mercado de 2 rodas. Distribuidora de
           bicipeças, motopeças e acessórios para ciclistas e motociclistas,
@@ -92,11 +92,11 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
         >
           <button
             onClick={() => scrollToSection('sobre')}
-            className="group flex items-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-8 py-4 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="group flex w-full max-w-[17.5rem] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-6 py-3.5 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-auto sm:max-w-none sm:px-8 sm:py-4"
           >
             Conheça a LM
             <ArrowRight
@@ -106,7 +106,7 @@ export function Hero() {
           </button>
           <button
             onClick={() => scrollToSection('marcas')}
-            className="rounded-full border-2 border-white/30 bg-white/10 px-8 py-4 text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20"
+            className="w-full max-w-[17.5rem] rounded-full border-2 border-white/30 bg-white/10 px-6 py-3.5 text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20 sm:w-auto sm:max-w-none sm:px-8 sm:py-4"
           >
             Nossas Marcas
           </button>
@@ -116,18 +116,18 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-8 flex flex-col items-center gap-3"
+          className="mt-7 flex flex-col items-center gap-3 md:mt-8"
         >
           <span className="text-xs uppercase tracking-[0.34em] text-white/58">
             Acesse nossos e-commerces
           </span>
 
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href="https://portal.lmbike.com.br/glstorefront/glbikes/pt/BRL/"
               target="_blank"
               rel="noreferrer"
-              className="group flex min-w-[220px] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-6 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)]"
+              className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18">
                 <Bike size={18} strokeWidth={1.8} />
@@ -141,7 +141,7 @@ export function Hero() {
               href="https://portal.lmmoto.com.br/glstorefront/glmotos/pt/BRL/"
               target="_blank"
               rel="noreferrer"
-              className="group flex min-w-[220px] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-6 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)]"
+              className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"
             >
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18">
                 <MotoOutline className="h-[30px] w-[30px] -translate-y-[2px] -translate-x-[3px]" />

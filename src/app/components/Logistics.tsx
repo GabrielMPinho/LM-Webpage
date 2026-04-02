@@ -1,17 +1,18 @@
 import { motion } from 'motion/react';
-import { Truck, MessageSquareHeart, MapPin, Clock } from 'lucide-react';
+import { Clock, MapPin, MessageSquareHeart, Truck } from 'lucide-react';
 
 export function Logistics() {
   const features = [
     {
       icon: Truck,
       title: 'Distribuição Nacional',
-      description: 'Atendendo mais de 20 mil varejistas e chegando em mais de 60% das cidades brasileiras.',
+      description:
+        'Atendendo mais de 20 mil varejistas e chegando em mais de 60% das cidades brasileiras.',
     },
     {
       icon: MessageSquareHeart,
-      title: 'Atendimento indivudualizado',
-      description: 'Atendimento no portal indivudualizado e humanizado.',
+      title: 'Atendimento individualizado',
+      description: 'Atendimento no portal individualizado e humanizado.',
     },
     {
       icon: MapPin,
@@ -28,17 +29,15 @@ export function Logistics() {
   return (
     <section
       id="logistica"
-      className="lm-section lm-section-dark relative flex min-h-screen items-center py-14 lg:min-h-[92vh] lg:py-16"
+      className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[92vh] lg:py-16"
     >
-      {/* Background Elements */}
       <div className="absolute inset-0 opacity-8">
-        <div className="absolute top-20 left-10 h-72 w-72 rounded-full bg-[#3565AD] blur-3xl" />
+        <div className="absolute left-10 top-20 h-72 w-72 rounded-full bg-[#3565AD] blur-3xl" />
         <div className="absolute bottom-20 right-10 h-72 w-72 rounded-full bg-[#326BB4] blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-none px-6 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="grid gap-10 lg:grid-cols-[minmax(360px,0.98fr)_minmax(0,1.02fr)] lg:items-start xl:gap-14">
-          {/* Left - Image */}
+      <div className="relative z-10 mx-auto w-full max-w-none px-5 lg:px-12 xl:px-16 2xl:px-20">
+        <div className="grid gap-7 lg:grid-cols-[minmax(360px,0.98fr)_minmax(0,1.02fr)] lg:items-start xl:gap-14">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -46,29 +45,30 @@ export function Logistics() {
             transition={{ duration: 0.8 }}
             className="order-2 lg:order-1 lg:mt-[4.2rem] lg:max-w-[38rem]"
           >
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-3 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm">
-              <div className="relative min-h-[24rem] overflow-hidden rounded-[1.6rem] sm:min-h-[28rem] lg:h-[min(72vh,39rem)] lg:min-h-0">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2.5 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm lg:p-3">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(72vh,39rem)] lg:min-h-0 lg:aspect-auto">
                 <img
                   src="https://images.unsplash.com/photo-1768796373360-95d80c5830fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3YXJlaG91c2UlMjBkaXN0cmlidXRpb258ZW58MXx8fHwxNzc0OTA2MzUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Logistics Center"
+                  alt="Centro de distribuição"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 lm-image-overlay" />
 
-                {/* Floating Stats */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 }}
-                  className="absolute right-5 top-5 rounded-2xl border border-white/70 bg-white/90 p-5 shadow-2xl backdrop-blur-md"
+                  className="absolute right-4 top-4 rounded-2xl border border-white/70 bg-white/90 p-4 shadow-2xl backdrop-blur-md md:right-5 md:top-5 md:p-5"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#3565AD] to-[#326BB4]">
-                      <Truck className="text-white" size={28} />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#3565AD] to-[#326BB4] md:h-14 md:w-14">
+                      <Truck className="text-white" size={24} />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-[#0C2041]">100%</p>
+                      <p className="text-xl font-bold text-[#0C2041] md:text-2xl">
+                        100%
+                      </p>
                       <p className="text-sm text-gray-600">Nacional</p>
                     </div>
                   </div>
@@ -77,7 +77,6 @@ export function Logistics() {
             </div>
           </motion.div>
 
-          {/* Right - Content */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -85,14 +84,13 @@ export function Logistics() {
             transition={{ duration: 0.8 }}
             className="order-1 lg:order-2"
           >
-            <span className="mb-4 block uppercase tracking-wider text-[#3565AD]">
+            <span className="mb-3 block uppercase tracking-wider text-[#3565AD]">
               Nossa Força
             </span>
-            <h2 className="mb-6 text-4xl font-bold leading-tight text-white md:text-5xl">
-              Logística de{' '}
-              <span className="text-[#3565AD]">Alta Performance</span>
+            <h2 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+              Logística de <span className="text-[#3565AD]">Alta Performance</span>
             </h2>
-            <p className="mb-7 text-lg leading-relaxed text-white/80">
+            <p className="mb-6 text-base leading-relaxed text-white/80 md:text-lg">
               Nossa infraestrutura logística é projetada para garantir
               eficiência, rapidez e confiabilidade em cada entrega.
             </p>
@@ -100,15 +98,15 @@ export function Logistics() {
             <div className="space-y-3">
               {features.map((feature, index) => (
                 <motion.div
-                  key={index}
+                  key={feature.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-4 rounded-xl border border-white/12 bg-white/[0.07] p-4 backdrop-blur-sm transition-colors hover:bg-white/[0.12]"
+                  className="flex items-start gap-3 rounded-xl border border-white/12 bg-white/[0.07] p-4 backdrop-blur-sm transition-colors hover:bg-white/[0.12] md:gap-4"
                 >
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#3565AD] to-[#326BB4]">
-                    <feature.icon className="text-white" size={24} />
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#3565AD] to-[#326BB4] md:h-12 md:w-12">
+                    <feature.icon className="text-white" size={22} />
                   </div>
                   <div>
                     <h3 className="mb-1 font-semibold text-white">

@@ -35,23 +35,23 @@ export function Navbar() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-[#0C2041]/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+          : 'bg-[#0C2041]/94 md:bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="mx-auto max-w-7xl px-5 md:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
           <motion.button
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => scrollToSection('hero')}
-            className="relative flex h-14 w-[180px] items-center overflow-hidden md:w-[200px]"
+            className="relative flex h-10 w-[116px] items-center overflow-hidden sm:w-[132px] md:h-14 md:w-[200px]"
             aria-label="Voltar ao topo"
           >
             <img
               src="/logo.png"
               alt="LM"
-              className="absolute left-1/2 top-1/2 h-[400%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+              className="absolute left-1/2 top-1/2 h-[360%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain md:h-[400%]"
             />
           </motion.button>
 
@@ -86,7 +86,7 @@ export function Navbar() {
             className="md:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
