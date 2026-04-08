@@ -19,7 +19,7 @@ const features = [
 export function About() {
   return (
     <section
-      id="sobre"
+      id="quem somos"
       className="lm-section lm-section-light relative flex min-h-screen scroll-mt-20 items-center py-10 lg:min-h-[92vh] lg:py-16"
     >
       <div className="relative z-10 mx-auto w-full max-w-none px-5 lg:px-12 xl:px-16 2xl:px-20">
