@@ -23,7 +23,7 @@ export function Navbar() {
   };
 
   const navItems = [
-    { label: 'Sobre', id: 'sobre' },
+    { label: 'Quem somos', id: 'quem somos' },
     { label: 'História', id: 'historia' },
     { label: 'Marcas', id: 'marcas' },
     { label: 'Logística', id: 'logistica' },

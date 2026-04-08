@@ -10,24 +10,6 @@ type Brand = {
 
 const motoBrands: Brand[] = [
   {
-    name: 'AGV',
-    logoSrc: '/avg.png',
-    logoAlt: 'Logo AGV',
-    logoClassName: 'max-h-24 max-w-[10rem]',
-  },
-  {
-    name: 'LEOVINCE',
-    logoSrc: '/Leovince.webp',
-    logoAlt: 'Logo Leovince',
-    logoClassName: 'max-h-24 max-w-[10.5rem]',
-  },
-  {
-    name: 'CHOHO',
-    logoSrc: '/choho.png',
-    logoAlt: 'Logo Choho',
-    logoClassName: 'max-h-40 max-w-[13em]',
-  },
-  {
     name: 'SCUD',
     logoSrc: '/scud.png',
     logoAlt: 'Logo Scud',
@@ -39,27 +21,27 @@ const motoBrands: Brand[] = [
     logoAlt: 'Logo X11',
     logoClassName: 'max-h-40 max-w-[9.5rem]',
   },
+  {
+    name: 'VEDAMOTORS',
+    logoSrc: '/vedamotors.jpg',
+    logoAlt: 'Logo VEDAMOTORS',
+    logoClassName: 'max-h-30 max-w-[10rem]',
+  },
+  {
+    name: 'CHOHO',
+    logoSrc: '/choho.png',
+    logoAlt: 'Logo Choho',
+    logoClassName: 'max-h-40 max-w-[13em]',
+  },
+  {
+    name: 'LEOVINCE',
+    logoSrc: '/Leovince.webp',
+    logoAlt: 'Logo Leovince',
+    logoClassName: 'max-h-24 max-w-[10.5rem]',
+  },
 ];
 
 const bikeBrands: Brand[] = [
-  {
-    name: 'DAHON',
-    logoSrc: '/dahon.jpg',
-    logoAlt: 'Logo Dahon',
-    logoClassName: 'max-h-24 max-w-[9.5rem]',
-  },
-  {
-    name: 'WG Imports',
-    logoSrc: '/wg.jpg',
-    logoAlt: 'Logo WG',
-    logoClassName: 'max-h-18 max-w-[10.75rem]',
-  },
-  {
-    name: 'MOSSO',
-    logoSrc: '/mosso.png',
-    logoAlt: 'Logo Mosso',
-    logoClassName: 'max-h-24 max-w-[10rem]',
-  },
   {
     name: 'SENTEC',
     logoSrc: '/sentec.jpg',
@@ -71,6 +53,24 @@ const bikeBrands: Brand[] = [
     logoSrc: '/high%20one.jpg',
     logoAlt: 'Logo High One',
     logoClassName: 'max-h-24 max-w-[10rem]',
+  },
+  {
+    name: 'FSA',
+    logoSrc: '/fsa.png',
+    logoAlt: 'Logo FSA',
+    logoClassName: 'max-h-24 max-w-[9.5rem]',
+  },
+  {
+    name: 'MOSSO',
+    logoSrc: '/mosso.png',
+    logoAlt: 'Logo Mosso',
+    logoClassName: 'max-h-24 max-w-[10rem]',
+  },
+  {
+    name: 'WG Imports',
+    logoSrc: '/wg.jpg',
+    logoAlt: 'Logo WG',
+    logoClassName: 'max-h-18 max-w-[10.75rem]',
   },
 ];
 
@@ -139,7 +139,7 @@ export function Brands() {
             Portfólio Próprio
           </span>
           <h2 className="mb-6 text-4xl font-bold text-[#0C2041] md:text-5xl">
-            Marcas para Moto e Bike
+            Marcas Moto e Bike
           </h2>
           <p className="mx-auto mt-0.5 max-w-3xl text-lg text-gray-600">
             Organizamos nossas marcas próprias em duas frentes claras: a
