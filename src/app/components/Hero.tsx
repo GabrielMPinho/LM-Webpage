@@ -118,8 +118,8 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-7 flex flex-col items-center gap-3 md:mt-8"
         >
-          <span className="text-xs uppercase tracking-[0.34em] text-white/58">
-            Acesse nossos e-commerces
+          <span className="text-xs uppercase tracking-[0.34em] text-[#ffffffb0]">
+            Acesse nossos portais de compra
           </span>
 
           <div className="flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
@@ -129,11 +129,11 @@ export function Hero() {
               rel="noreferrer"
               className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18 -translate-x-2">
                 <Bike size={18} strokeWidth={1.8} />
               </span>
-              <span className="text-sm font-semibold tracking-[0.06em]">
-                E-commerce Bike
+              <span className="text-sm font-semibold tracking-[0.23em] text-[1.1em]">
+                Portal Bike
               </span>
             </a>
 
@@ -143,11 +143,11 @@ export function Hero() {
               rel="noreferrer"
               className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18 -translate-x-2">
                 <MotoOutline className="h-[30px] w-[30px] -translate-y-[2px] -translate-x-[3px]" />
               </span>
-              <span className="text-sm font-semibold tracking-[0.06em]">
-                E-commerce Moto
+              <span className="text-sm font-semibold tracking-[0.23em] text-[1em]">
+                Portal Moto
               </span>
             </a>
           </div>
