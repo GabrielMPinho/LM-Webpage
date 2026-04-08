@@ -27,7 +27,7 @@ export function Navbar() {
     { label: 'História', id: 'historia' },
     { label: 'Marcas', id: 'marcas' },
     { label: 'Logística', id: 'logistica' },
-    { label: 'Contato', id: 'contato' },
+    { label: 'Carreira', id: 'carreira' },
   ];
 
   return (
