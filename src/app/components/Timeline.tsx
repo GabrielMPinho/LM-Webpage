@@ -342,7 +342,7 @@ export function Timeline() {
             Nossa Jornada
           </span>
           <h2 className="text-3xl font-bold text-[#0C2041] sm:text-4xl md:text-5xl">
-            Decadas de Evolucao
+            Décadas de Evolucao
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 md:text-base">
             Uma leitura vertical da evolucao da LM, onde cada marco responde ao

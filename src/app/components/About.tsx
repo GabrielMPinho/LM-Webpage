@@ -6,7 +6,7 @@ const features = [
     icon: Package,
     title: 'Variedade de Produtos',
     description:
-      'Catálogo completo com peças, acessórios e equipamentos das melhores marcas.',
+      'Catálogo completo com peças, acessórios, quipamentos e pneumáticos das melhores marcas.',
   },
   {
     icon: Globe,
@@ -43,7 +43,7 @@ export function About() {
             </h2>
 
             <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-slate-600 md:text-lg">
-              Somos uma distribuidora de partes, peças e acessórios para motos
+              Somos uma distribuidora de partes, peças, acessórios e pneumáticospara motos
               e bicicletas com atuação em todo Brasil.
             </p>
 
