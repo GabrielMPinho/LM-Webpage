@@ -90,7 +90,7 @@ export function About() {
               <div className="relative min-h-[16.5rem] overflow-hidden rounded-[1.4rem] sm:min-h-[24rem] sm:rounded-[1.6rem] lg:h-[min(77vh,40rem)] lg:min-h-0">
                 <img
                   src="/warehouse/galpaofora2.jpg"
-                  alt="Fachada do centro de distribuicao LM"
+                  alt="Fachada do centro de distribuição LM"
                   className="absolute inset-0 h-full w-full object-cover object-[center_62%] sm:object-center"
                 />
                 <div className="absolute inset-0 lm-image-overlay-soft" />

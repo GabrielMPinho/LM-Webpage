@@ -12,16 +12,16 @@ const milestones = [
   {
     year: '1981',
     title: 'Origem da LM',
-    category: 'Fundacao',
+    category: 'Fundação',
     description:
-      'Nasce a primeira revenda Lagoa Moto, ponto de partida da operacao que mais tarde daria origem ao ecossistema LM.',
+      'Nasce a primeira revenda Lagoa Moto, ponto de partida da operação que mais tarde daria origem ao ecossistema LM.',
   },
   {
     year: '1988',
     title: 'LM Comercial',
-    category: 'Distribuicao',
+    category: 'Distribuição',
     description:
-      'A LM Comercial inicia a distribuicao em Lagoa da Prata e estrutura a base do modelo regional de atendimento.',
+      'A LM Comercial inicia a distribuição em Lagoa da Prata e estrutura a base do modelo regional de atendimento.',
   },
   {
     year: '1996',
@@ -35,35 +35,35 @@ const milestones = [
     title: 'Expansao Sudeste',
     category: 'Escala',
     description:
-      'A operacao chega ao Espirito Santo e amplia a presenca geografica da companhia para alem da base original.',
+      'A operação chega ao Espirito Santo e amplia a presenca geografica da companhia para alem da base original.',
   },
   {
     year: '2006',
     title: 'Estreia da High One',
     category: 'Marca Propria',
     description:
-      'O primeiro produto High One chega ao mercado e marca o avanco da LM na construcao de marcas proprias.',
+      'O primeiro produto High One chega ao mercado e marca o avanco da LM na construção de marcas proprias.',
   },
   {
     year: '2007',
     title: 'Sul e X11',
     category: 'Crescimento',
     description:
-      'A operacao avanca para o Sul do pais enquanto a X11 reforca a presenca da LM no segmento de moto.',
+      'A operação avanca para o Sul do pais enquanto a X11 reforca a presenca da LM no segmento de moto.',
   },
   {
     year: '2008',
     title: 'Lancamento SCUD',
     category: 'Marca Propria',
     description:
-      'A chegada do primeiro produto SCUD acelera a estrategia de diferenciacao por marcas proprias e profundidade de mix.',
+      'A chegada do primeiro produto SCUD acelera a estrategia de diferenciação por marcas proprias e profundidade de mix.',
   },
   {
     year: '2009',
     title: 'WG Sports',
     category: 'Portfolio',
     description:
-      'WG Sports estreia para ampliar a atuacao em acessorios e linhas com apelo esportivo.',
+      'WG Sports estreia para ampliar a atuação em acessorios e linhas com apelo esportivo.',
   },
   {
     year: '2010',
@@ -77,7 +77,7 @@ const milestones = [
     title: 'Centro-Oeste',
     category: 'Logistica',
     description:
-      'A LM inaugura sua operacao no Centro-Oeste para ganhar velocidade logistica e ampliar cobertura nacional.',
+      'A LM inaugura sua operação no Centro-Oeste para ganhar velocidade logistica e ampliar cobertura nacional.',
   },
   {
     year: '2019',
@@ -95,17 +95,17 @@ const milestones = [
   },
   {
     year: '2024',
-    title: 'Operacao Norte',
+    title: 'Operação Norte',
     category: 'Cobertura',
     description:
-      'O inicio das operacoes no Norte completa uma malha de distribuicao ainda mais robusta e verdadeiramente nacional.',
+      'O inicio das operacoes no Norte completa uma malha de distribuição ainda mais robusta e verdadeiramente nacional.',
   },
   {
     year: '2026',
     title: 'LM na China',
     category: 'Sourcing Global',
     description:
-      'A operacao na China acelera sourcing, proximidade industrial e inteligencia de produto para a proxima fase da companhia.',
+      'A operação na China acelera sourcing, proximidade industrial e inteligencia de produto para a proxima fase da companhia.',
   },
 ];
 
@@ -342,10 +342,10 @@ export function Timeline() {
             Nossa Jornada
           </span>
           <h2 className="text-3xl font-bold text-[#0C2041] sm:text-4xl md:text-5xl">
-            Décadas de Evolucao
+            Décadas de Evolução
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 md:text-base">
-            Uma leitura vertical da evolucao da LM, onde cada marco responde ao
+            Uma leitura vertical da evolução da LM, onde cada marco responde ao
             scroll com destaque progressivo e transicoes mais fluidas.
           </p>
         </motion.div>

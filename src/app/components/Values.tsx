@@ -40,7 +40,7 @@ const values = [
     title: 'Honra, coragem e tradição',
     description:
       'Preservamos nossos princípios com firmeza, valorizando a história que sustenta a nossa identidade.',
-    imageSrc: '/values/honra-coragem-tradicao.png',
+    imageSrc: '/values/honra-coragem-tradição.png',
     imageAlt: 'Honra, coragem e tradição',
   },
   {

@@ -37,7 +37,7 @@ export function Careers() {
               <div className="relative aspect-[16/9] overflow-hidden rounded-[1.2rem] sm:min-h-[15rem] lg:h-[min(30vh,14rem)] lg:min-h-0 lg:aspect-auto">
                 <img
                   src="/warehouse/galpao4.jpg"
-                  alt="Operacao do galpao da LM"
+                  alt="Operação do galpao da LM"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/72 via-[#17355e]/28 to-transparent" />

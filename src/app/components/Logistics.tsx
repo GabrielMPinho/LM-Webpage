@@ -12,7 +12,7 @@ const galleryImages = [
   },
   {
     src: '/warehouse/galpao4.jpg',
-    alt: 'Vista ampla da operacao logistica com pallets',
+    alt: 'Vista ampla da operação logistica com pallets',
   },
 ];
 
@@ -64,7 +64,7 @@ export function Logistics() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(46vh,27rem)] lg:min-h-0 lg:aspect-auto">
                 <img
                   src="/warehouse/galpaoFora.jpg"
-                  alt="Centro de distribuicao LM"
+                  alt="Centro de distribuição LM"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 lm-image-overlay" />
