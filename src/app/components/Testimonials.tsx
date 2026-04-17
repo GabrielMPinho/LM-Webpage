@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { useExperiencePreferences } from '../hooks/useExperiencePreferences';
 
 function ArrowButton({
   direction,
@@ -88,16 +89,7 @@ const testimonials = [
 ];
 
 export function Testimonials() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1024px)');
-    const updateMatch = () => setIsDesktop(mediaQuery.matches);
-
-    updateMatch();
-    mediaQuery.addEventListener('change', updateMatch);
-    return () => mediaQuery.removeEventListener('change', updateMatch);
-  }, []);
+  const { isDesktop, prefersReducedMotion } = useExperiencePreferences();
 
   const settings = {
     dots: true,
@@ -107,9 +99,10 @@ export function Testimonials() {
     cssEase: 'ease-out',
     slidesToShow: isDesktop ? 2 : 1,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2500,
+    autoplay: !prefersReducedMotion,
+    autoplaySpeed: 4500,
     pauseOnHover: true,
+    pauseOnFocus: true,
     swipeToSlide: true,
     prevArrow: <ArrowButton direction="left" />,
     nextArrow: <ArrowButton direction="right" />,

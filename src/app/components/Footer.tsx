@@ -1,4 +1,3 @@
-import { motion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
 export function Footer() {
@@ -29,20 +28,28 @@ export function Footer() {
               excelência e confiabilidade.
             </p>
             <div className="flex gap-4">
-              <a
-                href="#"
+              <button
+                type="button"
+                aria-label="Facebook indisponível"
+                aria-disabled="true"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#3565AD] transition-colors"
               >
                 <Facebook size={20} />
-              </a>
+              </button>
               <a
-                href="#"
+                href="https://instagram.com/lmmotooficial/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram da LM 2 Rodas"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#3565AD] transition-colors"
               >
                 <Instagram size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/company/lmduasrodas/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn da LM 2 Rodas"
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#3565AD] transition-colors"
               >
                 <Linkedin size={20} />
@@ -127,12 +134,20 @@ export function Footer() {
               © {currentYear} LM Distribuidora. Todos os direitos reservados.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-[#3565AD] transition-colors">
+              <button
+                type="button"
+                aria-disabled="true"
+                className="text-white/60 hover:text-[#3565AD] transition-colors"
+              >
                 Política de Privacidade
-              </a>
-              <a href="#" className="text-white/60 hover:text-[#3565AD] transition-colors">
+              </button>
+              <button
+                type="button"
+                aria-disabled="true"
+                className="text-white/60 hover:text-[#3565AD] transition-colors"
+              >
                 Termos de Uso
-              </a>
+              </button>
             </div>
           </div>
         </div>

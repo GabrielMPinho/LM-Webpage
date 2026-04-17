@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Bike } from 'lucide-react';
+import { useExperiencePreferences } from '../hooks/useExperiencePreferences';
 
 type Brand = {
   name: string;
@@ -118,6 +119,8 @@ function BrandCard({
 }
 
 export function Brands() {
+  const { prefersReducedMotion } = useExperiencePreferences();
+
   return (
     <section id="marcas" className="lm-section lm-section-light relative py-16 lg:py-18">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -163,17 +166,25 @@ export function Brands() {
             </div>
 
             <div className="overflow-hidden">
-              <div className="brand-track brand-track-left flex w-max">
+              <div
+                className={
+                  prefersReducedMotion
+                    ? 'flex flex-wrap justify-center gap-6'
+                    : 'brand-track brand-track-left flex w-max'
+                }
+              >
                 <div className="flex gap-6 pr-6">
                   {motoBrands.map((brand) => (
                     <BrandCard key={`moto-a-${brand.name}`} brand={brand} />
                   ))}
                 </div>
-                <div className="flex gap-6 pr-6">
-                  {motoBrands.map((brand) => (
-                    <BrandCard key={`moto-b-${brand.name}`} brand={brand} />
-                  ))}
-                </div>
+                {!prefersReducedMotion && (
+                  <div className="flex gap-6 pr-6">
+                    {motoBrands.map((brand) => (
+                      <BrandCard key={`moto-b-${brand.name}`} brand={brand} />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -192,17 +203,25 @@ export function Brands() {
             </div>
 
             <div className="overflow-hidden">
-              <div className="brand-track brand-track-right flex w-max">
+              <div
+                className={
+                  prefersReducedMotion
+                    ? 'flex flex-wrap justify-center gap-6'
+                    : 'brand-track brand-track-right flex w-max'
+                }
+              >
                 <div className="flex gap-6 pr-6">
                   {bikeBrands.map((brand) => (
                     <BrandCard key={`bike-a-${brand.name}`} brand={brand} />
                   ))}
                 </div>
-                <div className="flex gap-6 pr-6">
-                  {bikeBrands.map((brand) => (
-                    <BrandCard key={`bike-b-${brand.name}`} brand={brand} />
-                  ))}
-                </div>
+                {!prefersReducedMotion && (
+                  <div className="flex gap-6 pr-6">
+                    {bikeBrands.map((brand) => (
+                      <BrandCard key={`bike-b-${brand.name}`} brand={brand} />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -239,6 +258,13 @@ export function Brands() {
         .brand-track-left:hover,
         .brand-track-right:hover {
           animation-play-state: paused;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .brand-track-left,
+          .brand-track-right {
+            animation: none !important;
+          }
         }
       `}</style>
     </section>

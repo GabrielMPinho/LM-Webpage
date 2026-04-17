@@ -2,9 +2,6 @@ import { motion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useState } from 'react';
 
-const webhookUrl =
-  'http://192.168.11.28:5678/webhook/bc4eeafa-bee3-44bc-b473-088bc3cd40f3';
-
 type FormState = {
   name: string;
   company: string;
@@ -12,6 +9,7 @@ type FormState = {
   phone: string;
   subject: string;
   message: string;
+  website: string;
 };
 
 const initialFormState: FormState = {
@@ -21,6 +19,7 @@ const initialFormState: FormState = {
   phone: '',
   subject: '',
   message: '',
+  website: '',
 };
 
 export function Contact() {
@@ -31,38 +30,47 @@ export function Contact() {
     message: string;
   }>({ type: null, message: '' });
 
+  const formEndpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT ?? '/api/contact';
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitState({ type: null, message: '' });
 
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(formEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          source: 'site-lm-contact-form',
-          submittedAt: new Date().toISOString(),
-        }),
+        body: JSON.stringify(formData),
       });
 
+      const responseBody = (await response.json()) as {
+        message?: string;
+        error?: string;
+      };
+
       if (!response.ok) {
-        throw new Error(`Webhook respondeu com status ${response.status}`);
+        throw new Error(
+          responseBody.error ?? `Webhook respondeu com status ${response.status}`
+        );
       }
 
       setFormData(initialFormState);
       setSubmitState({
         type: 'success',
-        message: 'Mensagem enviada com sucesso. Entraremos em contato em breve.',
+        message:
+          responseBody.message ??
+          'Mensagem enviada com sucesso. Entraremos em contato em breve.',
       });
-    } catch {
+    } catch (error) {
       setSubmitState({
         type: 'error',
         message:
-          'Nao foi possivel enviar agora. Verifique a conexao com o webhook e tente novamente.',
+          error instanceof Error
+            ? error.message
+            : 'Não foi possível enviar agora. Verifique a conexão com o webhook e tente novamente.',
       });
     } finally {
       setIsSubmitting(false);
@@ -79,7 +87,7 @@ export function Contact() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Endereco',
+      title: 'Endereço',
       content:
         'R. Min. Orozimbo Nonato, 102 - Vila da Serra, Nova Lima - MG, 34006-053',
     },
@@ -90,22 +98,29 @@ export function Contact() {
     },
     {
       icon: Mail,
-      title: 'Email',
+      title: 'E-mail',
       content: 'posvenda@lm2rodas.com.br',
     },
   ];
 
   const socialMedia = [
-    { icon: Facebook, url: '#', color: '#1877F2' },
+    {
+      icon: Facebook,
+      url: null,
+      color: '#1877F2',
+      label: 'Facebook indisponível',
+    },
     {
       icon: Instagram,
-      url: 'http://instagram.com/lmmotooficial/',
+      url: 'https://instagram.com/lmmotooficial/',
       color: '#E4405F',
+      label: 'Instagram da LM 2 Rodas',
     },
     {
       icon: Linkedin,
       url: 'https://www.linkedin.com/company/lmduasrodas/posts/?feedView=all',
       color: '#0A66C2',
+      label: 'LinkedIn da LM 2 Rodas',
     },
   ];
 
@@ -141,10 +156,10 @@ export function Contact() {
             className="lg:flex lg:h-full lg:flex-col lg:justify-center"
           >
             <h3 className="mb-4 text-2xl font-semibold text-[#0C2041]">
-              Informacoes de Contato
+              Informações de Contato
             </h3>
             <p className="mb-5 max-w-xl leading-relaxed text-gray-600">
-              Estamos prontos para atender voce. Entre em contato atraves de
+              Estamos prontos para atender você. Entre em contato através de
               qualquer um dos canais abaixo.
             </p>
 
@@ -177,21 +192,27 @@ export function Contact() {
               </h4>
               <div className="flex gap-4">
                 {socialMedia.map((social, index) => (
-                  <motion.a
+                  <motion.button
                     key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    type="button"
+                    onClick={() => {
+                      if (social.url) {
+                        window.open(social.url, '_blank', 'noopener,noreferrer');
+                      }
+                    }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -4 }}
+                    whileHover={social.url ? { scale: 1.1, y: -4 } : undefined}
                     className="flex h-12 w-12 items-center justify-center rounded-lg border border-white/70 bg-white/82 shadow-sm backdrop-blur-md transition-all hover:shadow-md"
                     style={{ color: social.color }}
+                    aria-label={social.label}
+                    aria-disabled={!social.url}
+                    disabled={!social.url}
                   >
                     <social.icon size={24} />
-                  </motion.a>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -213,6 +234,19 @@ export function Contact() {
               </div>
 
               <div className="grid gap-x-4 gap-y-4 md:grid-cols-2">
+                <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
                 <div>
                   <label
                     htmlFor="name"
@@ -336,6 +370,7 @@ export function Contact() {
                         ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
                         : 'border-red-200 bg-red-50 text-red-700'
                     }`}
+                    aria-live="polite"
                   >
                     {submitState.message}
                   </div>

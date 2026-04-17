@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const firstMobileLinkRef = useRef<HTMLButtonElement | null>(null);
+  const hasOpenedMenuRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +17,35 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = '';
+
+      if (hasOpenedMenuRef.current) {
+        menuButtonRef.current?.focus();
+      }
+
+      return;
+    }
+
+    hasOpenedMenuRef.current = true;
+    document.body.style.overflow = 'hidden';
+    firstMobileLinkRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -42,6 +75,7 @@ export function Navbar() {
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
           <motion.button
+            type="button"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => scrollToSection('hero')}
@@ -59,6 +93,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.button
+                type="button"
                 key={item.id}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -84,8 +119,13 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
+            ref={menuButtonRef}
+            type="button"
             className="md:hidden text-white"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -100,25 +140,27 @@ export function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-[#0C2041]/98 backdrop-blur-md"
+            id="mobile-navigation"
           >
             <div className="px-6 py-4 space-y-4">
-              {navItems.map((item) => (
-                <a
+              {navItems.map((item, index) => (
+                <button
                   key={item.id}
-                  href={`#${item.id}`}
+                  ref={index === 0 ? firstMobileLinkRef : undefined}
+                  type="button"
                   onClick={() => scrollToSection(item.id)}
                   className="block w-full text-left text-white/90 hover:text-white py-2"
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
-              <a
-                href="#contato"
+              <button
+                type="button"
                 onClick={() => scrollToSection('contato')}
                 className="block w-full rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-6 py-2.5 text-center text-white"
               >
                 Fale Conosco
-              </a>
+              </button>
             </div>
           </motion.div>
         )}

@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Bike, Zap } from 'lucide-react';
+import { ArrowRight, Bike } from 'lucide-react';
+import { useExperiencePreferences } from '../hooks/useExperiencePreferences';
 
 function MotoOutline({
   className = '',
@@ -25,6 +27,32 @@ function MotoOutline({
 }
 
 export function Hero() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const { isMobile, prefersReducedMotion, shouldReduceData } =
+    useExperiencePreferences();
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const shouldAutoplayVideo =
+    !isMobile && !prefersReducedMotion && !shouldReduceData;
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    setIsVideoReady(false);
+
+    if (!video) {
+      return;
+    }
+
+    if (!shouldAutoplayVideo) {
+      video.pause();
+      return;
+    }
+
+    void video.play().catch(() => {
+      setIsVideoReady(false);
+    });
+  }, [shouldAutoplayVideo]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -38,12 +66,27 @@ export function Hero() {
       className="relative flex min-h-screen items-center justify-center overflow-hidden pt-24 pb-10 md:h-screen md:pt-0 md:pb-0"
     >
       <div className="absolute inset-0 z-0">
+        <img
+          src="/hero-poster.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full scale-[1.35] object-cover object-[center_74%] md:scale-110 md:object-center"
+        />
+
         <video
-          autoPlay
+          ref={videoRef}
+          autoPlay={shouldAutoplayVideo}
           loop
           muted
           playsInline
-          className="absolute inset-0 h-full w-full scale-[1.35] object-cover object-[center_74%] md:scale-110 md:object-center"
+          preload={shouldAutoplayVideo ? 'metadata' : 'none'}
+          poster="/hero-poster.png"
+          onCanPlay={() => setIsVideoReady(true)}
+          onError={() => setIsVideoReady(false)}
+          className={`absolute inset-0 h-full w-full scale-[1.35] object-cover object-[center_74%] transition-opacity duration-300 md:scale-110 md:object-center ${
+            shouldAutoplayVideo && isVideoReady ? 'opacity-100' : 'opacity-0'
+          }`}
+          aria-hidden="true"
         >
           <source src="/videoHero.mp4" type="video/mp4" />
         </video>
@@ -72,7 +115,7 @@ export function Hero() {
           className="mx-auto mb-9 max-w-[19rem] text-base leading-relaxed text-white/82 sm:max-w-2xl sm:text-lg md:mb-5  md:max-w-3xl md:text-2xl"
         >
           Desde 1981 revolucionando o mercado de 2 rodas. Distribuidora de
-          bicipeças, motopeças, acessórios e peneumáticos para ciclistas e motociclistas,
+          bicipeças, motopeças, acessórios e pneumáticos para ciclistas e motociclistas,
           atendendo todo o território brasileiro.
         </motion.p>
 
@@ -83,6 +126,7 @@ export function Hero() {
           className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
         >
           <button
+            type="button"
             onClick={() => scrollToSection('quem-somos')}
             className="group flex w-full max-w-[17.5rem] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-6 py-3.5 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-auto sm:max-w-none sm:px-8 sm:py-4"
           >
@@ -93,6 +137,7 @@ export function Hero() {
             />
           </button>
           <button
+            type="button"
             onClick={() => scrollToSection('marcas')}
             className="w-full max-w-[17.5rem] rounded-full border-2 border-white/30 bg-white/10 px-6 py-3.5 text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/20 sm:w-auto sm:max-w-none sm:px-8 sm:py-4"
           >

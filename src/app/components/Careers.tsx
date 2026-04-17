@@ -3,7 +3,7 @@ import { ArrowRight, Briefcase } from 'lucide-react';
 
 export function Careers() {
   return (
-    <section id = "carreira" className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[78vh] lg:py-16">
+    <section id="carreira" className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[78vh] lg:py-16">
       <div className="absolute inset-0 opacity-8">
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#3565AD] blur-3xl" />
         <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-[#326BB4] blur-3xl" />
