@@ -43,7 +43,7 @@ export function Hero() {
           loop
           muted
           playsInline
-          className="absolute inset-0 h-full w-full scale-125 object-cover md:scale-110"
+          className="absolute inset-0 h-full w-full scale-[1.35] object-cover object-[center_74%] md:scale-110 md:object-center"
         >
           <source src="/videoHero.mp4" type="video/mp4" />
         </video>
@@ -51,40 +51,28 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/88 via-[#17355e]/66 to-[#3565AD]/40" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 text-center md:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex items-center justify-center gap-2 md:mt-10"
-        >
-          <Zap className="text-[#ffffffb0]" size={24} />
-          <span className="uppercase tracking-wider text-[#ffffffb0]">
-            Mais de 45 anos de experiência
-          </span>
-        </motion.div>
+      <div className="relative z-10 mx-auto max-w-7xl px-5 text-center md:px-6 lg:px-8 translate-y-6">
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-5 text-[2.8rem] font-bold leading-[1.02] text-white sm:text-5xl md:mb-6 md:text-7xl lg:text-8xl"
+          className="mb-5 text-[3rem] font-bold leading-[1] text-white sm:text-[5.2rem] md:mb-5 md:text-[7.2rem] lg:text-[8.2rem]"
         >
           Somos apaixonados
           <br />
-          <span className="bg-gradient-to-r from-[#3565AD] to-[#326BB4] bg-clip-text text-transparent">
-            por 2 rodas
-          </span>
+          <span className="text-white">por </span>
+          <span className="lm-text-glow-blue-strong">2 rodas</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mx-auto mb-9 max-w-[19rem] text-base leading-relaxed text-white/82 sm:max-w-2xl sm:text-lg md:mb-12 md:max-w-3xl md:text-2xl"
+          className="mx-auto mb-9 max-w-[19rem] text-base leading-relaxed text-white/82 sm:max-w-2xl sm:text-lg md:mb-5  md:max-w-3xl md:text-2xl"
         >
           Desde 1981 revolucionando o mercado de 2 rodas. Distribuidora de
-          bicipeças, motopeças e acessórios para ciclistas e motociclistas,
+          bicipeças, motopeças, acessórios e peneumáticos para ciclistas e motociclistas,
           atendendo todo o território brasileiro.
         </motion.p>
 
@@ -95,7 +83,7 @@ export function Hero() {
           className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
         >
           <button
-            onClick={() => scrollToSection('sobre')}
+            onClick={() => scrollToSection('quem-somos')}
             className="group flex w-full max-w-[17.5rem] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-6 py-3.5 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-auto sm:max-w-none sm:px-8 sm:py-4"
           >
             Conheça a LM
@@ -127,8 +115,7 @@ export function Hero() {
               href="https://portal.lmbike.com.br/glstorefront/glbikes/pt/BRL/"
               target="_blank"
               rel="noreferrer"
-              className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"
-            >
+              className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"            >
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18 -translate-x-2">
                 <Bike size={18} strokeWidth={1.8} />
               </span>
@@ -143,6 +130,7 @@ export function Hero() {
               rel="noreferrer"
               className="group flex w-full max-w-[18rem] items-center justify-center gap-3 rounded-full border border-white/18 bg-white/8 px-5 py-3 text-white shadow-[0_18px_45px_rgba(12,32,65,0.18)] backdrop-blur-md transition-all duration-300 hover:border-white/28 hover:bg-white/14 hover:shadow-[0_22px_55px_rgba(12,32,65,0.24)] sm:w-auto sm:max-w-none sm:min-w-[220px] sm:px-6"
             >
+            
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-white/90 transition-colors duration-300 group-hover:bg-white/18 -translate-x-2">
                 <MotoOutline className="h-[30px] w-[30px] -translate-y-[2px] -translate-x-[3px]" />
               </span>

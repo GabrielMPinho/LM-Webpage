@@ -13,7 +13,7 @@ const motoBrands: Brand[] = [
     name: 'SCUD',
     logoSrc: '/scud.png',
     logoAlt: 'Logo Scud',
-    logoClassName: 'max-h-40 max-w-[10rem]',
+    logoClassName: 'max-h-35 max-w-[10rem]',
   },
   {
     name: 'X11',

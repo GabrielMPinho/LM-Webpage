@@ -1,32 +1,87 @@
 import { motion } from 'motion/react';
-import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useState } from 'react';
 
-export function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
+const webhookUrl =
+  'http://192.168.11.28:5678/webhook/bc4eeafa-bee3-44bc-b473-088bc3cd40f3';
 
-  const handleSubmit = (e: React.FormEvent) => {
+type FormState = {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+};
+
+const initialFormState: FormState = {
+  name: '',
+  company: '',
+  email: '',
+  phone: '',
+  subject: '',
+  message: '',
+};
+
+export function Contact() {
+  const [formData, setFormData] = useState<FormState>(initialFormState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitState, setSubmitState] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setIsSubmitting(true);
+    setSubmitState({ type: null, message: '' });
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          source: 'site-lm-contact-form',
+          submittedAt: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook respondeu com status ${response.status}`);
+      }
+
+      setFormData(initialFormState);
+      setSubmitState({
+        type: 'success',
+        message: 'Mensagem enviada com sucesso. Entraremos em contato em breve.',
+      });
+    } catch {
+      setSubmitState({
+        type: 'error',
+        message:
+          'Nao foi possivel enviar agora. Verifique a conexao com o webhook e tente novamente.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
   const contactInfo = [
     {
       icon: MapPin,
-      title: 'Endereço',
-      content: 'R. Min. Orozimbo Nonato, 102 - Vila da Serra, Nova Lima - MG, 34006-053',
+      title: 'Endereco',
+      content:
+        'R. Min. Orozimbo Nonato, 102 - Vila da Serra, Nova Lima - MG, 34006-053',
     },
     {
       icon: Phone,
@@ -36,20 +91,31 @@ export function Contact() {
     {
       icon: Mail,
       title: 'Email',
-      content: 'contato@lmdistribuidora.com.br',
+      content: 'posvenda@lm2rodas.com.br',
     },
   ];
 
   const socialMedia = [
     { icon: Facebook, url: '#', color: '#1877F2' },
-    { icon: Instagram, url: 'http://instagram.com/lmmotooficial/', color: '#E4405F' },
-    { icon: Linkedin, url: 'https://www.linkedin.com/company/lmduasrodas/posts/?feedView=all', color: '#0A66C2' },
+    {
+      icon: Instagram,
+      url: 'http://instagram.com/lmmotooficial/',
+      color: '#E4405F',
+    },
+    {
+      icon: Linkedin,
+      url: 'https://www.linkedin.com/company/lmduasrodas/posts/?feedView=all',
+      color: '#0A66C2',
+    },
   ];
+
+  const inputClassName =
+    'w-full rounded-lg border border-gray-200 bg-white px-4 py-3 text-[#0C2041] placeholder:text-gray-400 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#3565AD]';
 
   return (
     <section
       id="contato"
-      className="lm-section lm-section-light relative flex min-h-screen scroll-mt-20 items-center py-12 lg:min-h-[calc(100vh-5rem)] lg:py-10"
+      className="lm-section lm-section-light relative flex min-h-[88vh] scroll-mt-20 items-center py-12 lg:min-h-[90vh] lg:py-10"
     >
       <div className="relative z-10 mx-auto w-full max-w-none px-6 lg:px-12 xl:px-16 2xl:px-20">
         <motion.div
@@ -66,7 +132,7 @@ export function Contact() {
           </h2>
         </motion.div>
 
-        <div className="grid gap-8 lg:min-h-[calc(100vh-16rem)] lg:grid-cols-[minmax(0,0.9fr)_minmax(400px,1.1fr)] lg:items-stretch xl:gap-12">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(400px,1.1fr)] lg:items-center xl:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -75,17 +141,17 @@ export function Contact() {
             className="lg:flex lg:h-full lg:flex-col lg:justify-center"
           >
             <h3 className="mb-4 text-2xl font-semibold text-[#0C2041]">
-              Informações de Contato
+              Informacoes de Contato
             </h3>
             <p className="mb-5 max-w-xl leading-relaxed text-gray-600">
-              Estamos prontos para atender você. Entre em contato através de
+              Estamos prontos para atender voce. Entre em contato atraves de
               qualquer um dos canais abaixo.
             </p>
 
             <div className="mb-6 space-y-3">
               {contactInfo.map((info, index) => (
                 <motion.div
-                  key={index}
+                  key={info.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -140,15 +206,19 @@ export function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="rounded-2xl border border-white/75 bg-white/84 p-5 shadow-lg backdrop-blur-md lg:flex lg:h-full lg:w-full lg:flex-col lg:justify-center lg:p-6"
+              className="w-full rounded-2xl border border-white/75 bg-white/84 p-5 shadow-lg backdrop-blur-md lg:flex lg:w-full lg:flex-col lg:justify-center lg:p-6"
             >
-              <div className="space-y-4 lg:flex lg:h-full lg:flex-col lg:justify-between">
+              <div className="mb-6 inline-flex w-fit rounded-full border border-[#3565AD]/20 bg-[#3565AD]/8 px-4 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#3565AD]">
+                LM2RODAS
+              </div>
+
+              <div className="grid gap-x-4 gap-y-4 md:grid-cols-2">
                 <div>
                   <label
                     htmlFor="name"
                     className="mb-2 block text-sm font-semibold text-[#0C2041]"
                   >
-                    Nome Completo
+                    Nome
                   </label>
                   <input
                     type="text"
@@ -157,8 +227,27 @@ export function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#3565AD]"
-                    placeholder="Seu nome"
+                    className={inputClassName}
+                    placeholder="Seu nome completo"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="company"
+                    className="mb-2 block text-sm font-semibold text-[#0C2041]"
+                  >
+                    Empresa
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    required
+                    className={inputClassName}
+                    placeholder="Sua empresa"
                   />
                 </div>
 
@@ -167,7 +256,7 @@ export function Contact() {
                     htmlFor="email"
                     className="mb-2 block text-sm font-semibold text-[#0C2041]"
                   >
-                    Email
+                    E-mail
                   </label>
                   <input
                     type="email"
@@ -176,7 +265,7 @@ export function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#3565AD]"
+                    className={inputClassName}
                     placeholder="seu@email.com"
                   />
                 </div>
@@ -186,7 +275,7 @@ export function Contact() {
                     htmlFor="phone"
                     className="mb-2 block text-sm font-semibold text-[#0C2041]"
                   >
-                    Telefone
+                    Telefone / Whatsapp
                   </label>
                   <input
                     type="tel"
@@ -194,12 +283,32 @@ export function Contact() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#3565AD]"
-                    placeholder="(11) 90000-0000"
+                    required
+                    className={inputClassName}
+                    placeholder="(00) 00000-0000"
                   />
                 </div>
 
-                <div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="subject"
+                    className="mb-2 block text-sm font-semibold text-[#0C2041]"
+                  >
+                    Assunto
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className={inputClassName}
+                    placeholder="Sobre o que voce quer falar?"
+                  />
+                </div>
+
+                <div className="md:col-span-2">
                   <label
                     htmlFor="message"
                     className="mb-2 block text-sm font-semibold text-[#0C2041]"
@@ -212,17 +321,32 @@ export function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows={4}
-                    className="w-full resize-none rounded-lg border border-gray-200 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[#3565AD]"
-                    placeholder="Como podemos ajudar?"
+                    rows={5}
+                    className={`${inputClassName} min-h-32 resize-none`}
+                    placeholder="Conte como podemos ajudar."
                   />
                 </div>
+              </div>
+
+              <div className="mt-6 space-y-4">
+                {submitState.type && (
+                  <div
+                    className={`rounded-2xl border px-4 py-3 text-sm ${
+                      submitState.type === 'success'
+                        ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
+                        : 'border-red-200 bg-red-50 text-red-700'
+                    }`}
+                  >
+                    {submitState.message}
+                  </div>
+                )}
 
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-gradient-to-r from-[#3565AD] to-[#326BB4] py-4 font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                  disabled={isSubmitting}
+                  className="w-full rounded-lg bg-gradient-to-r from-[#3565AD] to-[#326BB4] py-4 font-semibold text-white transition-all duration-300 hover:scale-[1.02] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Enviar Mensagem
+                  {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
                 </button>
               </div>
             </form>

@@ -3,29 +3,46 @@ import { ArrowRight, Briefcase } from 'lucide-react';
 
 export function Careers() {
   return (
-    <section id = "carreira" className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:py-20">
+    <section id = "carreira" className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[78vh] lg:py-16">
       <div className="absolute inset-0 opacity-8">
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#3565AD] blur-3xl" />
         <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-[#326BB4] blur-3xl" />
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-none px-5 lg:px-12 xl:px-16 2xl:px-20">
-        <div className="grid gap-7 lg:min-h-[78vh] lg:grid-cols-[minmax(380px,1fr)_minmax(0,1fr)] lg:items-stretch xl:gap-16">
+        <div className="grid gap-7 lg:min-h-[64vh] lg:grid-cols-[minmax(380px,0.98fr)_minmax(0,1.02fr)] lg:items-start xl:gap-14">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:flex lg:h-full lg:items-stretch"
+            className="space-y-3 lg:mt-[1.5rem] lg:flex lg:max-w-[38rem] lg:flex-col lg:items-stretch lg:space-y-3 -translate-y-3"
           >
             <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2.5 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm lg:p-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-full lg:min-h-[78vh] lg:aspect-auto xl:min-h-[80vh]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(41vh,24rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src="https://images.unsplash.com/photo-1758518732175-5d608ba3abdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHRlYW0lMjBwcm9mZXNzaW9uYWwlMjBvZmZpY2V8ZW58MXx8fHwxNzc0ODE2NjY0fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Equipe LM"
-                  className="h-full w-full object-cover object-center"
+                  src="/warehouse/careers-office.jpeg"
+                  alt="Escritorio da LM"
+                  className="h-full w-full object-cover object-[center_18%]"
                 />
                 <div className="absolute inset-0 lm-image-overlay" />
+
+                <div className="absolute left-4 top-4 rounded-full border border-white/25 bg-[#0C2041]/55 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.24em] text-white backdrop-blur-md md:left-5 md:top-5 md:px-4 md:py-2 md:text-xs translate-y-59">
+                  Ambiente Corporativo
+                </div>
+              </div>
+            </div>
+
+            <div className="relative w-full overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_22px_55px_rgba(7,18,36,0.22)] backdrop-blur-sm">
+              <div className="relative aspect-[16/9] overflow-hidden rounded-[1.2rem] sm:min-h-[15rem] lg:h-[min(30vh,14rem)] lg:min-h-0 lg:aspect-auto">
+                <img
+                  src="/warehouse/galpao4.jpg"
+                  alt="Operacao do galpao da LM"
+                  className="h-full w-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/72 via-[#17355e]/28 to-transparent" />
+
+
               </div>
             </div>
           </motion.div>
@@ -45,7 +62,7 @@ export function Careers() {
             </div>
 
             <h2 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              Faça Parte da <span className="text-[#3565AD]">Nossa História</span>
+              Faça Parte da <span className="lm-text-glow-blue">Nossa História</span>
             </h2>
 
             <p className="mb-6 text-base leading-relaxed text-white/80 md:text-lg">
@@ -82,13 +99,18 @@ export function Careers() {
               </div>
             </div>
 
-            <button className="group flex w-full max-w-[18rem] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-7 py-3.5 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-fit sm:max-w-none sm:px-8 sm:py-4">
+            <a
+              href="https://lm2rodas.vagas.solides.com.br/"
+              target="_blank"
+              rel="noreferrer"
+              className="group flex w-full max-w-[18rem] items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-7 py-3.5 text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:w-fit sm:max-w-none sm:px-8 sm:py-4"
+            >
               Ver Oportunidades
               <ArrowRight
                 className="transition-transform group-hover:translate-x-1"
                 size={20}
               />
-            </button>
+            </a>
           </motion.div>
         </div>
       </div>

@@ -1,417 +1,382 @@
-import { motion } from 'motion/react';
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react';
 import { CalendarDays } from 'lucide-react';
+import { useMotionValueEvent } from 'motion/react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 const milestones = [
   {
     year: '1981',
     title: 'Origem da LM',
-    category: 'Fundação',
+    category: 'Fundacao',
     description:
-      'Nasce a primeira revenda Lagoa Moto, ponto de partida da operação que mais tarde daria origem ao ecossistema LM.',
+      'Nasce a primeira revenda Lagoa Moto, ponto de partida da operacao que mais tarde daria origem ao ecossistema LM.',
   },
   {
     year: '1988',
     title: 'LM Comercial',
-    category: 'Distribuição',
+    category: 'Distribuicao',
     description:
-      'A LM Comercial inicia a distribuição em Lagoa da Prata e estrutura a base do modelo regional de atendimento.',
+      'A LM Comercial inicia a distribuicao em Lagoa da Prata e estrutura a base do modelo regional de atendimento.',
   },
   {
     year: '1996',
-    title: 'Comércio Exterior',
+    title: 'Comercio Exterior',
     category: 'Internacional',
     description:
-      'A primeira licença de comércio exterior abre caminho para relacionamento direto com fornecedores globais.',
+      'A primeira licenca de comercio exterior abre caminho para relacionamento direto com fornecedores globais.',
   },
   {
     year: '2004',
-    title: 'Expansão Sudeste',
+    title: 'Expansao Sudeste',
     category: 'Escala',
     description:
-      'A operação chega ao Espírito Santo e amplia a presença geográfica da companhia para além da base original.',
+      'A operacao chega ao Espirito Santo e amplia a presenca geografica da companhia para alem da base original.',
   },
   {
     year: '2006',
     title: 'Estreia da High One',
-    category: 'Marca Própria',
+    category: 'Marca Propria',
     description:
-      'O primeiro produto High One chega ao mercado e marca o avanço da LM na construção de marcas próprias.',
+      'O primeiro produto High One chega ao mercado e marca o avanco da LM na construcao de marcas proprias.',
   },
   {
     year: '2007',
     title: 'Sul e X11',
     category: 'Crescimento',
     description:
-      'A operação avança para o Sul do país enquanto a X11 reforça a presença da LM no segmento de moto.',
+      'A operacao avanca para o Sul do pais enquanto a X11 reforca a presenca da LM no segmento de moto.',
   },
   {
     year: '2008',
-    title: 'Lançamento SCUD',
-    category: 'Marca Própria',
+    title: 'Lancamento SCUD',
+    category: 'Marca Propria',
     description:
-      'A chegada do primeiro produto SCUD acelera a estratégia de diferenciação por marcas próprias e profundidade de mix.',
+      'A chegada do primeiro produto SCUD acelera a estrategia de diferenciacao por marcas proprias e profundidade de mix.',
   },
   {
     year: '2009',
     title: 'WG Sports',
-    category: 'Portfólio',
+    category: 'Portfolio',
     description:
-      'WG Sports estreia para ampliar a atuação em acessórios e linhas com apelo esportivo.',
+      'WG Sports estreia para ampliar a atuacao em acessorios e linhas com apelo esportivo.',
   },
   {
     year: '2010',
-    title: 'Base em São Paulo',
+    title: 'Base em Sao Paulo',
     category: 'Capilaridade',
     description:
-      'As operações começam em São Paulo, aproximando estoque e atendimento do maior polo consumidor do país.',
+      'As operacoes comecam em Sao Paulo, aproximando estoque e atendimento do maior polo consumidor do pais.',
   },
   {
     year: '2014',
     title: 'Centro-Oeste',
-    category: 'Logística',
+    category: 'Logistica',
     description:
-      'A LM inaugura sua operação no Centro-Oeste para ganhar velocidade logística e ampliar cobertura nacional.',
+      'A LM inaugura sua operacao no Centro-Oeste para ganhar velocidade logistica e ampliar cobertura nacional.',
   },
   {
     year: '2019',
     title: 'Nordeste',
-    category: 'Expansão',
+    category: 'Expansao',
     description:
-      'Uma nova frente operacional no Nordeste reduz prazos e consolida presença em uma região estratégica.',
+      'Uma nova frente operacional no Nordeste reduz prazos e consolida presenca em uma regiao estrategica.',
   },
   {
     year: '2023',
     title: 'Panther e Comander',
     category: 'Novas Marcas',
     description:
-      'Duas novas marcas próprias entram em cena e ampliam o portfólio com propostas complementares.',
+      'Duas novas marcas proprias entram em cena e ampliam o portfolio com propostas complementares.',
   },
   {
     year: '2024',
-    title: 'Operação Norte',
+    title: 'Operacao Norte',
     category: 'Cobertura',
     description:
-      'O início das operações no Norte completa uma malha de distribuição ainda mais robusta e verdadeiramente nacional.',
+      'O inicio das operacoes no Norte completa uma malha de distribuicao ainda mais robusta e verdadeiramente nacional.',
   },
   {
     year: '2026',
     title: 'LM na China',
     category: 'Sourcing Global',
     description:
-      'A operação na China acelera sourcing, proximidade industrial e inteligência de produto para a próxima fase da companhia.',
+      'A operacao na China acelera sourcing, proximidade industrial e inteligencia de produto para a proxima fase da companhia.',
   },
 ];
 
-const rows = [
-  {
-    items: milestones.slice(0, 5),
-    popupSides: ['top', 'top', 'top', 'top', 'top'],
-  },
-  {
-    items: milestones.slice(5, 10).reverse(),
-    popupSides: ['top', 'top', 'bottom', 'bottom', 'bottom'],
-  },
-  {
-    items: milestones.slice(10, 14),
-    popupSides: ['top', 'top', 'top', 'bottom'],
-  },
-] as const;
+type Milestone = (typeof milestones)[number];
 
-type PopupVerticalSide = 'top' | 'bottom';
-type PopupPlacement = {
-  cardClasses: string;
-  connectorClasses: string;
-  yearOnTop: boolean;
-};
+function TimelineMilestone({
+  milestone,
+  index,
+  isActive,
+  registerMarker,
+}: {
+  milestone: Milestone;
+  index: number;
+  isActive: boolean;
+  registerMarker: (index: number, node: HTMLDivElement | null) => void;
+}) {
+  const itemRef = useRef<HTMLElement | null>(null);
+  const isEven = index % 2 === 0;
 
-const popupOverrides: Record<string, PopupPlacement> = {
-  '1981': {
-    cardClasses:
-      'right-[calc(50%+2.1rem)] top-1/2 -translate-y-1/2 -translate-x-2 group-hover:translate-x-0',
-    connectorClasses:
-      'right-[calc(50%+0.9rem)] top-1/2 h-px w-8 -translate-y-1/2 bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2006': {
-    cardClasses:
-      'left-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] translate-x-2 translate-y-10 group-hover:translate-x-0 group-hover:translate-y-0',
-    connectorClasses:
-      'left-[calc(50%+0.9rem)] bottom-[calc(50%+0.9rem)] h-px w-9 rotate-[-34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2007': {
-    cardClasses:
-      'left-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
-    connectorClasses:
-      'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2008': {
-    cardClasses:
-      'left-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
-    connectorClasses:
-      'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2009': {
-    cardClasses:
-      'left-[calc(50%+1.9rem)] top-[calc(50%+1.8rem)] translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
-    connectorClasses:
-      'left-[calc(50%+0.9rem)] top-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2010': {
-    cardClasses:
-      'left-1/2 top-[calc(50%+2.3rem)] -translate-x-1/2 -translate-y-2 group-hover:translate-y-0',
-    connectorClasses:
-      'left-1/2 top-[calc(50%+0.9rem)] h-6 w-px -translate-x-1/2 bg-gradient-to-b from-[#3565AD]/0 via-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2014': {
-    cardClasses:
-      'right-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
-    connectorClasses:
-      'right-[calc(50%+0.9rem)] bottom-[calc(50%+0.9rem)] h-px w-9 rotate-[34deg] origin-right bg-gradient-to-l from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2019': {
-    cardClasses:
-      'left-[calc(50%+1.9rem)] bottom-[calc(50%+1.8rem)] translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0',
-    connectorClasses:
-      'left-[calc(50%+0.9rem)] bottom-[calc(50%+0.9rem)] h-px w-9 rotate-[-34deg] origin-left bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-  '2026': {
-    cardClasses:
-      'left-[calc(50%+2.1rem)] top-1/2 -translate-y-1/2 translate-x-2 group-hover:translate-x-0',
-    connectorClasses:
-      'left-[calc(50%+0.9rem)] top-1/2 h-px w-8 -translate-y-1/2 bg-gradient-to-r from-[#3565AD]/28 to-[#3565AD]/0',
-    yearOnTop: false,
-  },
-};
+  const { scrollYProgress } = useScroll({
+    target: itemRef,
+    offset: ['start end', 'end start'],
+  });
 
-const ajustes: Record<string, string> = {
-  '2006': 'translate-y-9',
-  '2008': 'translate-y-3',
-  '2009': 'translate-y-3',
-  '2010': 'translate-y-2',
-  '2014': 'translate-y-12',
-  '2019': 'translate-y-4',
-  '2023': 'translate-y-5',
-  '2024': 'translate-y-5',
-  '2026': 'translate-y-5',
-};
+  const cardY = useTransform(scrollYProgress, [0, 0.5, 1], [34, 0, -34]);
 
-const stackingOverrides: Record<string, string> = {
-  '2008': 'z-40',
-};
+  return (
+    <motion.article ref={itemRef} className="relative pl-8 md:pl-0">
+      <div className="absolute left-[0.78rem] top-7 z-20 -translate-x-7 md:left-1/2 md:top-8 md:-translate-x-1/2">
+        <div ref={(node) => registerMarker(index, node)}>
+          <div
+            className={`relative flex h-6 w-6 items-center justify-center rounded-full border transition-all duration-500 md:h-7 md:w-7 ${
+              isActive
+                ? 'border-[#3565AD]/30 bg-[#0C2041] shadow-[0_0_0_7px_rgba(53,101,173,0.12)]'
+                : 'border-white bg-white shadow-[0_0_0_7px_rgba(255,255,255,0.78)]'
+            }`}
+          >
+            <span
+              className={`block rounded-full transition-all duration-500 ${
+                isActive
+                  ? 'h-3 w-3 bg-gradient-to-br from-[#8DB6FF] to-[#3565AD] md:h-3.5 md:w-3.5'
+                  : 'h-2 w-2 bg-[#B5C8E8] md:h-2.5 md:w-2.5'
+              }`}
+            />
+          </div>
+        </div>
+      </div>
 
-function getPopupHorizontalPosition(index: number, total: number) {
-  if (index === 0) return 'left-0';
-  if (index === total - 1) return 'right-0';
-  return 'left-1/2 -translate-x-1/2';
-}
+      <div
+        className={`md:flex ${isEven ? 'md:justify-start' : 'md:justify-end'}`}
+      >
+        <div className="w-full md:w-[calc(50%-2.75rem)]">
+          <motion.div
+            className={`relative overflow-hidden rounded-[1.4rem] border p-4 shadow-[0_24px_60px_rgba(12,32,65,0.10)] transition-all duration-500 md:rounded-[1.65rem] md:p-6 ${
+              isActive
+                ? 'border-[#3565AD]/16 bg-[#0C2041] text-white shadow-[0_28px_70px_rgba(12,32,65,0.20)]'
+                : 'border-white/80 bg-white/68 text-[#0C2041]'
+            }`}
+            style={{ y: cardY }}
+          >
+            <div
+              className={`pointer-events-none absolute inset-0 ${
+                isActive
+                  ? 'bg-[radial-gradient(circle_at_top_right,rgba(141,182,255,0.22),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(53,101,173,0.22),transparent_34%)]'
+                  : 'bg-[radial-gradient(circle_at_top_right,rgba(53,101,173,0.08),transparent_28%)]'
+              }`}
+            />
 
-function getDefaultPopupPlacement(
-  popupSide: PopupVerticalSide,
-  index: number,
-  total: number
-): PopupPlacement {
-  const popupHorizontalPosition = getPopupHorizontalPosition(index, total);
+            <div className="relative">
+              <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <div className="min-w-0">
+                  <div
+                    className={`mb-3 inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] sm:px-3 sm:text-[11px] sm:tracking-[0.24em] ${
+                      isActive
+                        ? 'border-white/12 bg-white/8 text-[#9BC0FF]'
+                        : 'border-[#3565AD]/14 bg-[#3565AD]/7 text-[#3565AD]'
+                    }`}
+                  >
+                    <CalendarDays size={14} />
+                    {milestone.category}
+                  </div>
 
-  return {
-    cardClasses: `${popupHorizontalPosition} ${
-      popupSide === 'top'
-        ? 'bottom-[calc(50%+2.3rem)] translate-y-2 group-hover:translate-y-0'
-        : 'top-[calc(50%+2.3rem)] -translate-y-2 group-hover:translate-y-0'
-    }`,
-    connectorClasses: `left-1/2 h-6 w-px -translate-x-1/2 bg-gradient-to-b from-[#3565AD]/0 via-[#3565AD]/28 to-[#3565AD]/0 ${
-      popupSide === 'top' ? 'bottom-[calc(50%+0.9rem)]' : 'top-[calc(50%+0.9rem)]'
-    }`,
-    yearOnTop: popupSide === 'bottom',
-  };
+                  <h3
+                    className={`max-w-md text-lg font-semibold leading-tight sm:text-xl md:text-2xl ${
+                      isActive ? 'text-white' : 'text-[#0C2041]'
+                    }`}
+                  >
+                    {milestone.title}
+                  </h3>
+                </div>
+
+                <div className="flex items-end justify-between gap-3 sm:block sm:text-right">
+                  <p
+                    className={`text-[2rem] font-bold leading-none sm:text-[2.25rem] md:text-[2.9rem] ${
+                      isActive ? 'lm-text-glow-blue' : 'text-[#3565AD]'
+                    }`}
+                  >
+                    {milestone.year}
+                  </p>
+                  <p
+                    className={`text-[10px] font-semibold uppercase tracking-[0.18em] sm:mt-1 sm:text-[11px] sm:tracking-[0.24em] ${
+                      isActive ? 'text-white/52' : 'text-slate-400'
+                    }`}
+                  >
+                    Marco {String(index + 1).padStart(2, '0')}
+                  </p>
+                </div>
+              </div>
+
+              <p
+                className={`max-w-xl text-[14px] leading-7 md:text-[15px] ${
+                  isActive ? 'text-white/76' : 'text-slate-600'
+                }`}
+              >
+                {milestone.description}
+              </p>
+
+              <div className="mt-5">
+                <div
+                  className={`h-px w-full ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#8DB6FF]/60 to-transparent'
+                      : 'bg-gradient-to-r from-[#3565AD]/22 to-transparent'
+                  }`}
+                />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </motion.article>
+  );
 }
 
 export function Timeline() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const markerRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [markerStops, setMarkerStops] = useState<number[]>([]);
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  const registerMarker = useCallback(
+    (index: number, node: HTMLDivElement | null) => {
+      markerRefs.current[index] = node;
+    },
+    []
+  );
+
+  const computeMarkerStops = useCallback(() => {
+    const trackNode = trackRef.current;
+
+    if (!trackNode) {
+      return;
+    }
+
+    const trackRect = trackNode.getBoundingClientRect();
+    if (trackRect.height <= 0) {
+      return;
+    }
+
+    const startOffset = window.innerHeight * 0.24;
+    const totalTravel = startOffset + trackRect.height;
+    const stops = markerRefs.current.map((node) => {
+      if (!node) {
+        return 0;
+      }
+
+      const markerRect = node.getBoundingClientRect();
+      const markerCenterWithinTrack =
+        markerRect.top + markerRect.height / 2 - trackRect.top;
+
+      return Math.min(
+        1,
+        Math.max(0, (startOffset + markerCenterWithinTrack) / totalTravel)
+      );
+    });
+
+    setMarkerStops(stops);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start center', 'end center'],
+  });
+
+  const progressScale = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 24,
+    mass: 0.25,
+  });
+
+  const progressOpacity = useTransform(scrollYProgress, [0, 0.08], [0.45, 1]);
+
+  useEffect(() => {
+    computeMarkerStops();
+    window.addEventListener('resize', computeMarkerStops);
+
+    return () => window.removeEventListener('resize', computeMarkerStops);
+  }, [computeMarkerStops]);
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (!markerStops.length) {
+      return;
+    }
+
+    let nextActiveIndex = -1;
+    for (let i = 0; i < markerStops.length; i += 1) {
+      if (latest >= markerStops[i]) {
+        nextActiveIndex = i;
+      } else {
+        break;
+      }
+    }
+
+    setActiveIndex((current) =>
+      current === nextActiveIndex ? current : nextActiveIndex
+    );
+  });
+
   return (
     <section
       id="historia"
-      className="lm-section lm-section-soft relative flex min-h-screen items-center py-10 lg:min-h-[92vh] lg:py-16"
+      ref={sectionRef}
+      className="lm-section lm-section-soft relative py-12 lg:py-16"
     >
       <div className="relative z-10 mx-auto w-full max-w-none px-5 lg:px-12 xl:px-16 2xl:px-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-8 text-center lg:mb-10"
+          className="mb-8 text-center lg:mb-12"
         >
           <span className="mb-4 block uppercase tracking-wider text-[#3565AD]">
             Nossa Jornada
           </span>
           <h2 className="text-3xl font-bold text-[#0C2041] sm:text-4xl md:text-5xl">
-            Décadas de Evolução
+            Decadas de Evolucao
           </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-slate-600 md:text-base">
+            Uma leitura vertical da evolucao da LM, onde cada marco responde ao
+            scroll com destaque progressivo e transicoes mais fluidas.
+          </p>
         </motion.div>
 
-        <div className="lg:hidden">
-          <div className="relative rounded-[2rem] border border-white/75 bg-white/60 p-4 shadow-[0_30px_80px_rgba(12,32,65,0.10)] backdrop-blur-md">
-            <div className="pointer-events-none absolute inset-0">
-              <div className="absolute left-[8%] top-[16%] h-24 w-24 rounded-full bg-[#3565AD]/6 blur-3xl" />
-              <div className="absolute right-[6%] bottom-[16%] h-24 w-24 rounded-full bg-[#326BB4]/7 blur-3xl" />
-            </div>
-
-            <div className="relative rounded-[1.6rem] border border-white/70 bg-white/58 p-4 shadow-[0_18px_45px_rgba(12,32,65,0.05)] backdrop-blur-sm">
-              <div className="absolute bottom-6 left-[1.35rem] top-6 w-px bg-gradient-to-b from-[#3565AD]/20 via-[#3565AD]/40 to-[#3565AD]/15" />
-
-              <div className="space-y-4">
-                {milestones.map((milestone, index) => (
-                  <motion.div
-                    key={milestone.year}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.04 }}
-                    className="relative pl-10"
-                  >
-                    <div className="absolute left-0 top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white bg-white shadow-[0_0_0_6px_rgba(255,255,255,0.78)]">
-                      <span className="h-3.5 w-3.5 rounded-full bg-gradient-to-br from-[#3565AD] to-[#326BB4]" />
-                    </div>
-
-                    <div className="rounded-2xl border border-white/75 bg-[#0C2041]/95 p-4 text-left text-white shadow-[0_20px_55px_rgba(12,32,65,0.18)] backdrop-blur-xl">
-                      <div className="mb-3 flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
-                          <CalendarDays size={18} className="text-[#8BB2F1]" />
-                        </div>
-                        <div>
-                          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8BB2F1]">
-                            {milestone.category}
-                          </p>
-                          <h3 className="mt-1 text-base font-semibold text-white">
-                            {milestone.title}
-                          </h3>
-                        </div>
-                      </div>
-
-                      <div className="mb-3 inline-flex rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/82">
-                        {milestone.year}
-                      </div>
-
-                      <p className="text-sm leading-6 text-white/78">
-                        {milestone.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+        <div className="relative mx-auto max-w-6xl rounded-[2rem] border border-white/75 bg-white/60 px-4 py-6 shadow-[0_30px_80px_rgba(12,32,65,0.10)] backdrop-blur-md lg:px-8 lg:py-8">
+          <div className="pointer-events-none absolute inset-0">
+            <div className="absolute left-[8%] top-[10%] h-28 w-28 rounded-full bg-[#3565AD]/8 blur-3xl" />
+            <div className="absolute right-[8%] bottom-[8%] h-28 w-28 rounded-full bg-[#326BB4]/10 blur-3xl" />
           </div>
-        </div>
 
-        <div className="hidden lg:block">
-          <div className="relative rounded-[2rem] border border-white/75 bg-white/60 px-4 py-5 shadow-[0_30px_80px_rgba(12,32,65,0.10)] backdrop-blur-md lg:px-6 lg:py-6">
-            <div className="pointer-events-none absolute inset-0">
-              <div className="absolute left-[8%] top-[16%] h-28 w-28 rounded-full bg-[#3565AD]/6 blur-3xl" />
-              <div className="absolute right-[6%] bottom-[16%] h-28 w-28 rounded-full bg-[#326BB4]/7 blur-3xl" />
-            </div>
+          <div className="relative rounded-[1.7rem] border border-white/70 bg-white/56 px-4 py-8 shadow-[0_18px_45px_rgba(12,32,65,0.05)] backdrop-blur-sm md:px-6 lg:px-10 lg:py-10">
+            <div
+              ref={trackRef}
+              className="pointer-events-none absolute bottom-10 left-[0.78rem] top-10 w-px bg-gradient-to-b from-[#3565AD]/12 via-[#3565AD]/20 to-[#3565AD]/8 md:left-1/2 md:-translate-x-1/2"
+            />
+            <motion.div
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-10 left-[0.78rem] top-[-24vh] origin-top w-px bg-[linear-gradient(180deg,rgba(225,238,255,0)_0%,rgba(169,200,255,0.9)_28%,rgba(95,146,243,0.95)_64%,rgba(12,32,65,1)_100%)] shadow-[0_0_22px_rgba(53,101,173,0.24)] md:left-1/2 md:-translate-x-1/2"
+              style={{ scaleY: progressScale, opacity: progressOpacity }}
+            />
 
-            <div className="relative overflow-visible rounded-[1.6rem] border border-white/70 bg-white/52 px-4 py-6 shadow-[0_18px_45px_rgba(12,32,65,0.05)] backdrop-blur-sm lg:px-8 lg:py-8">
-              <svg
-                viewBox="0 0 1000 480"
-                preserveAspectRatio="none"
-                className="pointer-events-none absolute inset-0 h-full w-full"
-                aria-hidden="true"
-              >
-                <path
-                  d="M92 96 H792 C882 96 922 160 922 204 C922 239 885 252 818 252 H214 C126 252 82 316 82 360 C82 395 119 408 182 408 H846"
-                  stroke="rgba(53,101,173,0.18)"
-                  strokeWidth="14"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
+            <div className="relative space-y-5 md:space-y-7">
+              {milestones.map((milestone, index) => (
+                <TimelineMilestone
+                  key={milestone.year}
+                  milestone={milestone}
+                  index={index}
+                  isActive={index === activeIndex}
+                  registerMarker={registerMarker}
                 />
-                <path
-                  d="M92 96 H792 C882 96 922 160 922 204 C922 239 885 252 818 252 H214 C126 252 82 316 82 360 C82 395 119 408 182 408 H846"
-                  stroke="rgba(53,101,173,0.52)"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-              </svg>
-
-              <div className="relative space-y-6 lg:space-y-7">
-                {rows.map((row, rowIndex) => (
-                  <div
-                    key={`row-${rowIndex}`}
-                    className="grid h-28 gap-3 sm:gap-4 lg:h-32"
-                    style={{
-                      gridTemplateColumns: `repeat(${row.items.length}, minmax(0, 1fr))`,
-                    }}
-                  >
-                    {row.items.map((milestone, itemIndex) => {
-                      const popupSide = row.popupSides[itemIndex];
-                      const placement =
-                        popupOverrides[milestone.year] ??
-                        getDefaultPopupPlacement(popupSide, itemIndex, row.items.length);
-
-                      return (
-                        <motion.div
-                          key={`${rowIndex}-${milestone.year}`}
-                          initial={{ opacity: 0, y: 18 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                        transition={{ delay: rowIndex * 0.08 + itemIndex * 0.06 }}
-                        className={`group relative isolate min-h-0 min-w-0 ${
-                          ajustes[milestone.year] || ''
-                        } ${stackingOverrides[milestone.year] || ''} hover:z-[80]`}
-                      >
-                          <div
-                            className={`absolute left-1/2 -translate-x-1/2 text-center ${
-                              placement.yearOnTop ? 'top-2' : 'bottom-2'
-                            }`}
-                          >
-                            <span className="text-sm font-semibold uppercase tracking-[0.28em] text-[#0C2041] sm:text-base">
-                              {milestone.year}
-                            </span>
-                          </div>
-
-                          <div className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white bg-white shadow-[0_0_0_6px_rgba(255,255,255,0.78)]">
-                              <span className="h-3.5 w-3.5 rounded-full bg-gradient-to-br from-[#3565AD] to-[#326BB4] transition-transform duration-300 group-hover:scale-125" />
-                            </div>
-                          </div>
-
-                          <div
-                            className={`pointer-events-none absolute z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${placement.connectorClasses}`}
-                          />
-
-                          <div
-                            className={`pointer-events-none absolute z-30 w-[14.5rem] rounded-2xl border border-white/80 bg-[#0C2041]/96 p-4 text-left text-white opacity-0 shadow-[0_24px_70px_rgba(12,32,65,0.28)] backdrop-blur-xl transition-all duration-300 group-hover:pointer-events-auto group-hover:opacity-100 ${placement.cardClasses}`}
-                          >
-                            <div className="mb-3 flex items-center gap-3">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10">
-                                <CalendarDays size={18} className="text-[#8BB2F1]" />
-                              </div>
-                              <div>
-                                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8BB2F1]">
-                                  {milestone.category}
-                                </p>
-                                <h3 className="mt-1 text-base font-semibold text-white">
-                                  {milestone.title}
-                                </h3>
-                              </div>
-                            </div>
-
-                            <p className="text-sm leading-6 text-white/78">
-                              {milestone.description}
-                            </p>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>

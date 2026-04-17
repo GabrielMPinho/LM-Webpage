@@ -127,7 +127,7 @@ export function Stats() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative aspect-[0.92] overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm sm:aspect-square lg:row-span-2 lg:aspect-auto lg:h-full lg:p-6"
+            className="relative aspect-[0.8] overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm sm:aspect-square sm:p-5 lg:row-span-2 lg:aspect-auto lg:h-full lg:p-6"
           >
             <div className="absolute inset-0">
               <div className="absolute left-6 top-6 h-24 w-24 rounded-full bg-[#3565AD]/20 blur-3xl" />
@@ -136,16 +136,16 @@ export function Stats() {
 
             <div className="relative z-10 flex h-full flex-col">
               <div className="mb-3">
-                <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.08] px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white/[0.65]">
+                <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.08] px-2.5 py-1 text-[9px] uppercase tracking-[0.18em] text-white/[0.65] sm:px-3 sm:text-[10px] sm:tracking-[0.24em]">
                   Cobertura Nacional
                 </span>
-                <h3 className="mt-3 text-lg font-bold text-white sm:text-xl">
+                <h3 className="mt-3 max-w-[14rem] text-base font-bold leading-snug text-white sm:max-w-none sm:text-xl">
                   Nossos centros de distribuição no Brasil
                 </h3>
               </div>
 
               <div className="relative min-h-0 flex-1">
-                <div className="absolute inset-x-[9%] inset-y-[10%] sm:inset-x-[10%] sm:inset-y-[8%]">
+                <div className="absolute inset-x-[15%] inset-y-[16%] sm:inset-x-[10%] sm:inset-y-[8%]">
                   <img
                     src="/brazil-map.svg"
                     alt="Mapa do Brasil"
@@ -174,10 +174,10 @@ export function Stats() {
                           repeat: Infinity,
                           delay: index * 0.25,
                         }}
-                        className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6FA8FF]/40 blur-sm sm:h-9 sm:w-9"
+                        className="absolute left-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#6FA8FF]/40 blur-sm sm:h-9 sm:w-9"
                       />
-                      <span className="relative flex h-3.5 w-3.5 items-center justify-center rounded-full border border-white/70 bg-[#DDEBFF] shadow-[0_0_18px_rgba(111,168,255,0.75)] sm:h-4 sm:w-4">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#0C2041]" />
+                      <span className="relative flex h-3 w-3 items-center justify-center rounded-full border border-white/70 bg-[#DDEBFF] shadow-[0_0_18px_rgba(111,168,255,0.75)] sm:h-4 sm:w-4">
+                        <span className="absolute left-1/2 top-1/2 h-1.25 w-1.25 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0C2041] sm:h-1.5 sm:w-1.5" />
                       </span>
                       <span
                         className={`pointer-events-none absolute left-1/2 top-full mt-3 hidden w-max -translate-x-1/2 rounded-full border border-white/15 bg-[#08172e]/[0.88] px-3 py-1.5 text-[11px] font-medium tracking-[0.12em] text-white/90 opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-100 lg:block ${
@@ -202,17 +202,17 @@ export function Stats() {
               transition={{ delay: index * 0.1 }}
               className="group relative"
             >
-              <div className="min-h-[12.5rem] rounded-2xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:bg-white/10 lg:h-full lg:min-h-0 lg:p-6">
+              <div className="min-h-[11.5rem] rounded-2xl border border-white/10 bg-white/5 p-4 text-center backdrop-blur-sm transition-all duration-300 hover:scale-[1.03] hover:bg-white/10 sm:p-5 lg:h-full lg:min-h-0 lg:p-6">
                 <div className="mb-4 flex justify-center pt-1">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#3565AD] to-[#326BB4] transition-transform group-hover:scale-110 lg:h-16 lg:w-16">
-                    <stat.icon className="text-white" size={28} />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#3565AD] to-[#326BB4] transition-transform group-hover:scale-110 sm:h-14 sm:w-14 lg:h-16 lg:w-16">
+                    <stat.icon className="text-white" size={24} />
                   </div>
                 </div>
-                <div className="mb-2 text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+                <div className="mb-2 text-[1.9rem] font-bold text-white sm:text-4xl lg:text-5xl">
                   <CountUp end={stat.value} isInView={isInView} />
                   <span>{stat.suffix}</span>
                 </div>
-                <p className="text-sm text-white/70 sm:text-base">{stat.label}</p>
+                <p className="text-sm leading-6 text-white/70 sm:text-base">{stat.label}</p>
               </div>
             </motion.div>
           ))}

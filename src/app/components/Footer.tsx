@@ -17,14 +17,14 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Column 1 - About */}
           <div>
-            <div className="relative mb-6 flex h-56 w-[250px] items-center overflow-hidden md:h-[5.8rem] md:w-[270px]">
+            <div className="relative mb-6 flex h-28 w-[170px] items-center overflow-hidden sm:h-32 sm:w-[190px] md:h-[5.8rem] md:w-[270px]">
               <img
                 src="/logoFooter.png"
                 alt="LM"
-                className="absolute left-1/2 top-1/2 h-[400%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain"
+                className="absolute left-1/2 top-1/2 h-[190%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain sm:h-[220%] md:h-[400%]"
               />
             </div>
-            <p className="text-white/70 mb-6 leading-relaxed">
+            <p className="mb-6 max-w-[18rem] text-white/70 leading-relaxed">
               Mais de 45 anos conectando o Brasil ao mundo das duas rodas com
               excelência e confiabilidade.
             </p>
@@ -56,7 +56,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <button
-                  onClick={() => scrollToSection('sobre')}
+                  onClick={() => scrollToSection('quem-somos')}
                   className="text-white/70 hover:text-[#3565AD] transition-colors"
                 >
                   Sobre Nós
@@ -114,7 +114,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="text-[#3565AD] flex-shrink-0 mt-1" size={18} />
-                <span className="text-white/70">contato@lmdistribuidora.com.br</span>
+                <span className="text-white/70">posvenda@lm2rodas.com.br</span>
               </li>
             </ul>
           </div>

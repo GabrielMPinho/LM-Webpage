@@ -1,6 +1,21 @@
 import { motion } from 'motion/react';
 import { Clock, MapPin, MessageSquareHeart, Truck } from 'lucide-react';
 
+const galleryImages = [
+  {
+    src: '/warehouse/galpao8.jpg',
+    alt: 'Corredor de armazenamento com bins organizados',
+  },
+  {
+    src: '/warehouse/galpao6.jpg',
+    alt: 'Corredor de estoque com enderecamento e acesso amplo',
+  },
+  {
+    src: '/warehouse/galpao4.jpg',
+    alt: 'Vista ampla da operacao logistica com pallets',
+  },
+];
+
 export function Logistics() {
   const features = [
     {
@@ -29,7 +44,7 @@ export function Logistics() {
   return (
     <section
       id="logistica"
-      className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[92vh] lg:py-16"
+      className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[78vh] lg:py-16"
     >
       <div className="absolute inset-0 opacity-8">
         <div className="absolute left-10 top-20 h-72 w-72 rounded-full bg-[#3565AD] blur-3xl" />
@@ -43,13 +58,13 @@ export function Logistics() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="order-2 lg:order-1 lg:mt-[4.2rem] lg:max-w-[38rem]"
+            className="order-2 space-y-4 lg:order-1 lg:mt-[2.5rem] lg:max-w-[38rem] -translate-y-7"
           >
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2.5 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm lg:p-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(72vh,39rem)] lg:min-h-0 lg:aspect-auto">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(46vh,27rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src="https://images.unsplash.com/photo-1768796373360-95d80c5830fb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3YXJlaG91c2UlMjBkaXN0cmlidXRpb258ZW58MXx8fHwxNzc0OTA2MzUxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Centro de distribuição"
+                  src="/warehouse/galpaoFora.jpg"
+                  alt="Centro de distribuicao LM"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 lm-image-overlay" />
@@ -75,6 +90,27 @@ export function Logistics() {
                 </motion.div>
               </div>
             </div>
+
+            <div className="grid gap-3 sm:grid-cols-3">
+              {galleryImages.map((image, index) => (
+                <motion.div
+                  key={image.src}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 + index * 0.08 }}
+                  className="overflow-hidden rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-1.5 shadow-[0_20px_45px_rgba(7,18,36,0.22)]"
+                >
+                  <div className="aspect-[1/1] overflow-hidden rounded-[1rem] lg:aspect-[5/6]">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
           <motion.div
@@ -88,7 +124,7 @@ export function Logistics() {
               Nossa Força
             </span>
             <h2 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              Logística de <span className="text-[#3565AD]">Alta Performance</span>
+              Logística de <span className="lm-text-glow-blue">Alta Performance</span>
             </h2>
             <p className="mb-6 text-base leading-relaxed text-white/80 md:text-lg">
               Nossa infraestrutura logística é projetada para garantir

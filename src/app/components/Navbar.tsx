@@ -23,7 +23,7 @@ export function Navbar() {
   };
 
   const navItems = [
-    { label: 'Quem somos', id: 'quem somos' },
+    { label: 'Quem somos', id: 'quem-somos' },
     { label: 'História', id: 'historia' },
     { label: 'Marcas', id: 'marcas' },
     { label: 'Logística', id: 'logistica' },
@@ -70,15 +70,16 @@ export function Navbar() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#3565AD] group-hover:w-full transition-all duration-300" />
               </motion.button>
             ))}
-            <motion.button
+            <motion.a
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
+              href="#contato"
               onClick={() => scrollToSection('contato')}
               className="px-6 py-2.5 bg-gradient-to-r from-[#3565AD] to-[#326BB4] text-white rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               Fale Conosco
-            </motion.button>
+            </motion.a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,20 +103,22 @@ export function Navbar() {
           >
             <div className="px-6 py-4 space-y-4">
               {navItems.map((item) => (
-                <button
+                <a
                   key={item.id}
+                  href={`#${item.id}`}
                   onClick={() => scrollToSection(item.id)}
                   className="block w-full text-left text-white/90 hover:text-white py-2"
                 >
                   {item.label}
-                </button>
+                </a>
               ))}
-              <button
+              <a
+                href="#contato"
                 onClick={() => scrollToSection('contato')}
-                className="w-full px-6 py-2.5 bg-gradient-to-r from-[#3565AD] to-[#326BB4] text-white rounded-full"
+                className="block w-full rounded-full bg-gradient-to-r from-[#3565AD] to-[#326BB4] px-6 py-2.5 text-center text-white"
               >
                 Fale Conosco
-              </button>
+              </a>
             </div>
           </motion.div>
         )}
