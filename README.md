@@ -15,32 +15,132 @@ Built with React and Vite. The project is organized as a single-page experience 
 
 ## Project Structure
 
-```text
-src/
-  app/
-    App.tsx
-    components/
-      Navbar.tsx
-      Hero.tsx
-      About.tsx
-      Stats.tsx
-      Timeline.tsx
-      Brands.tsx
-      Logistics.tsx
-      Values.tsx
-      Testimonials.tsx
-      Careers.tsx
-      Contact.tsx
-      Footer.tsx
-  styles/
-    fonts.css
-    index.css
-    tailwind.css
-    theme.css
-public/
-  logo assets
-  section images
-  videoHero.mp4
+```
+Site LM
+├─ api
+├─ ATTRIBUTIONS.md
+├─ guidelines
+│  └─ Guidelines.md
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ brazil-map.svg
+│  ├─ choho.png
+│  ├─ dahon.jpg
+│  ├─ fsa.png
+│  ├─ high one.jpg
+│  ├─ Leovince.webp
+│  ├─ logo.png
+│  ├─ logoFooter.png
+│  ├─ logoLM.png
+│  ├─ mosso.png
+│  ├─ scud.png
+│  ├─ sentec.jpg
+│  ├─ values
+│  │  ├─ agimos-com-proposito.png
+│  │  ├─ cultura-maior-ou-igual.png
+│  │  ├─ edificamos-pessoas.png
+│  │  ├─ eticos-em-todas-as-acoes.png
+│  │  ├─ honra-coragem-tradicao.png
+│  │  ├─ movidos-por-desafios.png
+│  │  ├─ paixao-de-dono.png
+│  │  └─ profissionalismo-simplicidade.png
+│  ├─ vedamotors.jpg
+│  ├─ videoHero.mp4
+│  ├─ warehouse
+│  │  ├─ careers-office.jpeg
+│  │  ├─ galpao1.jpg
+│  │  ├─ galpao2.jpg
+│  │  ├─ galpao3.jpg
+│  │  ├─ galpao4.jpg
+│  │  ├─ galpao5.jpg
+│  │  ├─ galpao6.jpg
+│  │  ├─ galpao7.jpg
+│  │  ├─ galpao8.jpg
+│  │  ├─ galpaoFora.jpg
+│  │  └─ galpaofora2.jpg
+│  ├─ wg.jpg
+│  └─ x11.png
+├─ README.md
+├─ server
+├─ src
+│  ├─ app
+│  │  ├─ App.tsx
+│  │  ├─ components
+│  │  │  ├─ About.tsx
+│  │  │  ├─ Brands.tsx
+│  │  │  ├─ Careers.tsx
+│  │  │  ├─ Contact.tsx
+│  │  │  ├─ figma
+│  │  │  │  └─ ImageWithFallback.tsx
+│  │  │  ├─ Footer.tsx
+│  │  │  ├─ Hero.tsx
+│  │  │  ├─ Logistics.tsx
+│  │  │  ├─ Navbar.tsx
+│  │  │  ├─ Stats.tsx
+│  │  │  ├─ Testimonials.tsx
+│  │  │  ├─ Timeline.tsx
+│  │  │  ├─ ui
+│  │  │  │  ├─ accordion.tsx
+│  │  │  │  ├─ alert-dialog.tsx
+│  │  │  │  ├─ alert.tsx
+│  │  │  │  ├─ aspect-ratio.tsx
+│  │  │  │  ├─ avatar.tsx
+│  │  │  │  ├─ badge.tsx
+│  │  │  │  ├─ breadcrumb.tsx
+│  │  │  │  ├─ button.tsx
+│  │  │  │  ├─ calendar.tsx
+│  │  │  │  ├─ card.tsx
+│  │  │  │  ├─ carousel.tsx
+│  │  │  │  ├─ chart.tsx
+│  │  │  │  ├─ checkbox.tsx
+│  │  │  │  ├─ collapsible.tsx
+│  │  │  │  ├─ command.tsx
+│  │  │  │  ├─ context-menu.tsx
+│  │  │  │  ├─ dialog.tsx
+│  │  │  │  ├─ drawer.tsx
+│  │  │  │  ├─ dropdown-menu.tsx
+│  │  │  │  ├─ form.tsx
+│  │  │  │  ├─ hover-card.tsx
+│  │  │  │  ├─ input-otp.tsx
+│  │  │  │  ├─ input.tsx
+│  │  │  │  ├─ label.tsx
+│  │  │  │  ├─ menubar.tsx
+│  │  │  │  ├─ navigation-menu.tsx
+│  │  │  │  ├─ pagination.tsx
+│  │  │  │  ├─ popover.tsx
+│  │  │  │  ├─ progress.tsx
+│  │  │  │  ├─ radio-group.tsx
+│  │  │  │  ├─ resizable.tsx
+│  │  │  │  ├─ scroll-area.tsx
+│  │  │  │  ├─ select.tsx
+│  │  │  │  ├─ separator.tsx
+│  │  │  │  ├─ sheet.tsx
+│  │  │  │  ├─ sidebar.tsx
+│  │  │  │  ├─ skeleton.tsx
+│  │  │  │  ├─ slider.tsx
+│  │  │  │  ├─ sonner.tsx
+│  │  │  │  ├─ switch.tsx
+│  │  │  │  ├─ table.tsx
+│  │  │  │  ├─ tabs.tsx
+│  │  │  │  ├─ textarea.tsx
+│  │  │  │  ├─ toggle-group.tsx
+│  │  │  │  ├─ toggle.tsx
+│  │  │  │  ├─ tooltip.tsx
+│  │  │  │  ├─ use-mobile.ts
+│  │  │  │  └─ utils.ts
+│  │  │  └─ Values.tsx
+│  │  └─ hooks
+│  ├─ main.tsx
+│  └─ styles
+│     ├─ fonts.css
+│     ├─ index.css
+│     ├─ tailwind.css
+│     └─ theme.css
+└─ vite.config.ts
+
 ```
 
 ## Main Sections
@@ -106,3 +206,4 @@ To update the website:
 Special thanks to LM Distribuidora for the opportunity to work on this project and contribute to the modernization of its institutional presence.
 
 Also, sincere thanks to my colleagues and team members for their collaboration, insights, and support throughout the development process.
+
