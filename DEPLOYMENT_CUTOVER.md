@@ -26,8 +26,7 @@ O Site LM e um site institucional em formato single-page application. Ele aprese
 - `src/app/components/ui/`: componentes reutilizaveis de interface.
 - `src/styles/`: arquivos globais de CSS, tema e fontes.
 - `public/`: arquivos estaticos copiados para producao, como logos, imagens, video, SVGs e PHP do formulario.
-- `public/api/contact.php`: endpoint PHP que recebe o formulario e repassa para o n8n.
-- `public/api/contact.config.example.php`: exemplo de configuracao da URL do webhook n8n.
+- `public/api/contact.php`: endpoint PHP que recebe o formulario e envia e-mail com `mail()`.
 - `dist/`: pasta gerada pelo comando de build. E essa pasta que deve ser publicada no servidor.
 
 ### Como o site funciona em producao
@@ -54,55 +53,41 @@ Para subir apenas o site institucional, sera necessario:
 Para o formulario funcionar futuramente, tambem sera necessario:
 
 - PHP habilitado
-- extensao PHP cURL habilitada
-- acesso do servidor HostGator ao n8n
+- envio de e-mail habilitado no servidor, normalmente via Exim/mail() do cPanel
+- conta/remetente do dominio, como `noreply@lm2rodas.com.br`, preferencialmente criada no cPanel
 
 ### Formulario de contato
 
-O formulario nao deve bloquear o deploy inicial do site. O site pode ser publicado mesmo que o envio do formulario ainda nao esteja funcionando.
+O formulario usa PHP simples com `mail()`. O site pode ser publicado mesmo que o envio ainda precise ser validado no cPanel, mas o arquivo `/api/contact.php` ja esta preparado para receber os campos do React.
 
-O navegador nao chama mais o webhook do n8n diretamente. O fluxo correto e:
+Fluxo:
 
 ```text
 Usuario envia formulario
 -> site chama /api/contact.php
 -> PHP valida os campos
--> PHP envia os dados para o webhook do n8n
--> n8n executa a automacao
+-> PHP envia e-mail via mail() do cPanel
 ```
 
 Isso evita:
 
-- exposicao da URL real do webhook no JavaScript
+- dependencia de n8n para o deploy inicial
 - problemas de CORS
-- mixed content
-- tentativa de acesso a IP privado pelo navegador do visitante
+- necessidade de Node.js ou backend persistente
 
-Para ativar o formulario no futuro, o servidor precisa ter o arquivo:
+O endpoint aceita os campos enviados pelo React:
 
 ```text
-public_html/api/contact.config.php
+name
+company
+email
+phone
+subject
+message
+website
 ```
 
-com a URL real do webhook que seja acessivel a partir do servidor HostGator.
-
-Exemplo com n8n rodando no proprio servidor dedicado:
-
-```php
-<?php
-
-$n8nWebhookUrl = 'http://127.0.0.1:5678/webhook/contato-site-lm';
-```
-
-Exemplo com VPN/tunel para o n8n interno:
-
-```php
-<?php
-
-$n8nWebhookUrl = 'http://192.168.x.x:5678/webhook/contato-site-lm';
-```
-
-Observacao: o arquivo PHP atual exige URL HTTPS por seguranca. Se a decisao for chamar n8n local (`127.0.0.1`) ou via VPN HTTP, essa validacao precisara ser ajustada antes de ativar o formulario.
+O campo `website` e um honeypot antispam. Ele fica oculto para usuarios reais; se vier preenchido, o PHP ignora o envio.
 
 ## 2. Guia passo a passo de deploy
 
@@ -144,7 +129,6 @@ dist/assets/...
 dist/videoHero.mp4
 dist/warehouse/...
 dist/api/contact.php
-dist/api/contact.config.example.php
 ```
 
 Importante: a pasta `dist/` nao deve ser enviada como uma subpasta para o site. O conteudo dela deve ir diretamente para `public_html/`.
@@ -183,8 +167,8 @@ No WHM:
    - HTTPS
    - `.htaccess`
    - redirecionamento com `mod_rewrite`
-
-PHP e cURL so precisam ser validados nesta etapa se o formulario for ativado junto com o deploy.
+   - PHP, se o formulario for testado junto com o deploy
+   - envio por `mail()`, se o formulario for testado junto com o deploy
 
 No DNS:
 
@@ -208,61 +192,28 @@ Depois do envio, a estrutura deve ficar parecida com:
 public_html/index.html
 public_html/assets/
 public_html/api/contact.php
-public_html/api/contact.config.example.php
 public_html/videoHero.mp4
 public_html/warehouse/
 public_html/logo.png
 ```
 
-### 5. Opcional: configurar o formulario com n8n
+### 5. Ajustar destinatarios do formulario
 
-Esta etapa nao e obrigatoria para subir o site. Se o formulario ficar para depois, pule para o passo 6.
-
-No servidor, dentro de:
+No arquivo:
 
 ```text
-public_html/api/
+public_html/api/contact.php
 ```
 
-crie o arquivo:
-
-```text
-contact.config.php
-```
-
-Conteudo:
+validar a lista de destinatarios:
 
 ```php
-<?php
-
-$n8nWebhookUrl = 'URL-DO-WEBHOOK-N8N';
+$recipients = [
+    'posvenda@lm2rodas.com.br',
+];
 ```
 
-Troque `URL-DO-WEBHOOK-N8N` pela URL real do webhook.
-
-Existem duas possibilidades principais:
-
-1. Instalar o n8n no proprio servidor dedicado da HostGator.
-
-   Nesse caso, o PHP chama o webhook localmente:
-
-   ```php
-   <?php
-
-   $n8nWebhookUrl = 'http://127.0.0.1:5678/webhook/contato-site-lm';
-   ```
-
-2. Criar VPN/tunel entre o servidor HostGator e a rede interna onde o n8n ja roda.
-
-   Nesse caso, o PHP chama o IP interno atraves da VPN:
-
-   ```php
-   <?php
-
-   $n8nWebhookUrl = 'http://192.168.x.x:5678/webhook/contato-site-lm';
-   ```
-
-Observacao: como o PHP atual foi criado para exigir HTTPS, sera necessario ajustar `public_html/api/contact.php` caso a URL escolhida seja `http://127.0.0.1` ou `http://192.168.x.x` via VPN.
+Se necessario, adicionar outros e-mails corporativos. Para melhor entregabilidade, criar no cPanel a conta `noreply@lm2rodas.com.br`, que e usada como remetente tecnico do formulario.
 
 ### 6. Criar ou atualizar o `.htaccess`
 
@@ -328,7 +279,8 @@ Validar:
 7. Console do navegador sem erros criticos.
 8. HTTPS ativo.
 9. Nenhum erro de mixed content.
-10. Formulario pode ficar pendente se a integracao com n8n ainda nao tiver sido definida.
+10. Formulario enviando POST para `/api/contact.php`.
+11. E-mail de teste recebido no destinatario configurado.
 
 ### 8. Fazer a virada de DNS
 
@@ -343,6 +295,7 @@ Na janela de cutover:
    - `https://dominio.com.br`
    - `https://www.dominio.com.br`
    - carregamento de imagens e video
+   - formulario de contato
 
 ### 9. Validar depois da publicacao
 
@@ -353,7 +306,7 @@ Depois que o dominio estiver apontando para a HostGator:
 3. Conferir logs de erro no cPanel.
 4. Validar se o SSL ficou correto para dominio raiz e `www`.
 5. Rodar um teste de performance, como Lighthouse/PageSpeed.
-6. Quando a integracao do n8n for definida, testar o formulario separadamente.
+6. Enviar um contato real de teste e confirmar recebimento do e-mail.
 
 ### 10. Rollback
 
@@ -361,7 +314,7 @@ Se houver problema critico:
 
 1. Reapontar o DNS para o servidor anterior, se ele ainda estiver ativo.
 2. Ou restaurar o backup anterior em `public_html/`.
-3. Se o problema for somente no formulario, manter o site no ar e corrigir apenas `public_html/api/contact.config.php` ou o webhook do n8n.
+3. Se o problema for somente no formulario, manter o site no ar e corrigir apenas `public_html/api/contact.php` ou a configuracao de e-mail do cPanel.
 4. Se o problema for no build, gerar novo `npm run build` e reenviar o conteudo de `dist/`.
 
 ### 11. Checklist final
@@ -371,21 +324,14 @@ Se houver problema critico:
 - [ ] conteudo de `dist/` enviado para `public_html/`
 - [ ] `public_html/index.html` existe
 - [ ] `public_html/assets/` existe
-- [ ] `public_html/api/contact.php` existe, mesmo que o formulario fique pendente
+- [ ] `public_html/api/contact.php` existe
+- [ ] destinatarios do formulario conferidos em `contact.php`
+- [ ] conta `noreply@lm2rodas.com.br` criada ou remetente ajustado
 - [ ] `.htaccess` configurado
 - [ ] SSL ativo
 - [ ] HTTP redirecionando para HTTPS
 - [ ] DNS apontando para o servidor dedicado
 - [ ] e-mails do dominio preservados
+- [ ] envio do formulario testado
 - [ ] site validado em desktop e mobile
 - [ ] backup/rollback definido
-
-Checklist futuro para ativar o formulario:
-
-- [ ] definido se o n8n ficara no servidor dedicado ou sera acessado por VPN/tunel
-- [ ] PHP habilitado no cPanel
-- [ ] cURL habilitado no PHP
-- [ ] `public_html/api/contact.config.php` criado
-- [ ] `public_html/api/contact.php` ajustado se a URL do n8n for HTTP local/VPN
-- [ ] webhook do n8n ativo
-- [ ] envio de teste chegando no n8n

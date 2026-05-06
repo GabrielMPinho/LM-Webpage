@@ -4,7 +4,6 @@ dist/
 .env
 .env.*
 !.env.example
-public/api/contact.config.php
 
 coverage/
 *.log
