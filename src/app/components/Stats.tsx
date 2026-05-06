@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { BookOpenText, Building2, MapPin, Users } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 const stats = [
   { icon: Building2, value: 45, suffix: '+', label: 'Anos de História' },
@@ -32,9 +33,11 @@ const distributionCenters = [
   { code: 'LM', label: 'Lagoa da Prata (MG)', left: '71%', top: '64%' },
 ];
 
+const brazilMapSrc = publicPath('brazil-map.svg');
+
 const brazilMaskStyle = {
-  WebkitMaskImage: "url('/brazil-map.svg')",
-  maskImage: "url('/brazil-map.svg')",
+  WebkitMaskImage: `url('${brazilMapSrc}')`,
+  maskImage: `url('${brazilMapSrc}')`,
   WebkitMaskPosition: 'center',
   maskPosition: 'center',
   WebkitMaskRepeat: 'no-repeat',
@@ -147,7 +150,7 @@ export function Stats() {
               <div className="relative min-h-0 flex-1">
                 <div className="absolute inset-x-[15%] inset-y-[16%] sm:inset-x-[10%] sm:inset-y-[8%]">
                   <img
-                    src="/brazil-map.svg"
+                    src={brazilMapSrc}
                     alt="Mapa do Brasil"
                     className="absolute inset-0 h-full w-full object-contain opacity-20"
                   />

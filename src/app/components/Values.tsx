@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { publicPath } from '../lib/public-path';
 
 const values = [
   {
@@ -40,7 +41,7 @@ const values = [
     title: 'Honra, coragem e tradição',
     description:
       'Preservamos nossos princípios com firmeza, valorizando a história que sustenta a nossa identidade.',
-    imageSrc: '/values/honra-coragem-tradição.png',
+    imageSrc: '/values/honra-coragem-tradicao.png',
     imageAlt: 'Honra, coragem e tradição',
   },
   {
@@ -95,7 +96,7 @@ export function Values() {
               <div className="mb-6 flex">
                 <div className="h-24 w-24 overflow-hidden xl:h-28 xl:w-28">
                   <img
-                    src={value.imageSrc}
+                    src={publicPath(value.imageSrc)}
                     alt={value.imageAlt}
                     className="h-full w-full object-contain"
                   />

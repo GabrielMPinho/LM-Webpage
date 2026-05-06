@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { publicPath } from '../lib/public-path';
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,7 +50,7 @@ export function Navbar() {
             aria-label="Voltar ao topo"
           >
             <img
-              src="/logo.png"
+              src={publicPath('logo.png')}
               alt="LM"
               className="absolute left-1/2 top-1/2 h-[360%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain md:h-[400%]"
             />

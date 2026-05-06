@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Clock, MapPin, MessageSquareHeart, Truck } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 const galleryImages = [
   {
@@ -63,7 +64,7 @@ export function Logistics() {
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2.5 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm lg:p-3">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(46vh,27rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src="/warehouse/galpaoFora.jpg"
+                  src={publicPath('warehouse/galpaoFora.jpg')}
                   alt="Centro de distribuição LM"
                   className="h-full w-full object-cover object-center"
                 />
@@ -103,7 +104,7 @@ export function Logistics() {
                 >
                   <div className="aspect-[1/1] overflow-hidden rounded-[1rem] lg:aspect-[5/6]">
                     <img
-                      src={image.src}
+                      src={publicPath(image.src)}
                       alt={image.alt}
                       className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                     />

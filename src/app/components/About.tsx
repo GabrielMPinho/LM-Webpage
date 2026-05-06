@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Globe, Package } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 const features = [
   {
@@ -89,7 +90,7 @@ export function About() {
             <div className="relative -translate-y-1 overflow-hidden rounded-[2rem] border border-[#3565AD]/12 bg-white/55 p-2 shadow-[0_30px_80px_rgba(12,32,65,0.16)] backdrop-blur-sm sm:p-2.5 lg:h-[min(80vh,50rem)] lg:-translate-y-8 lg:p-3">
               <div className="relative min-h-[16.5rem] overflow-hidden rounded-[1.4rem] sm:min-h-[24rem] sm:rounded-[1.6rem] lg:h-[min(77vh,40rem)] lg:min-h-0">
                 <img
-                  src="/warehouse/galpaofora2.jpg"
+                  src={publicPath('warehouse/galpaofora2.jpg')}
                   alt="Fachada do centro de distribuição LM"
                   className="absolute inset-0 h-full w-full object-cover object-[center_62%] sm:object-center"
                 />

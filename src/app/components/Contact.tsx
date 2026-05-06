@@ -1,9 +1,9 @@
 import { motion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useState } from 'react';
+import { publicPath } from '../lib/public-path';
 
-const webhookUrl =
-  'http://192.168.11.28:5678/webhook/bc4eeafa-bee3-44bc-b473-088bc3cd40f3';
+const contactEndpoint = publicPath('api/contact.php');
 
 type FormState = {
   name: string;
@@ -12,6 +12,7 @@ type FormState = {
   phone: string;
   subject: string;
   message: string;
+  website: string;
 };
 
 const initialFormState: FormState = {
@@ -21,6 +22,7 @@ const initialFormState: FormState = {
   phone: '',
   subject: '',
   message: '',
+  website: '',
 };
 
 export function Contact() {
@@ -37,7 +39,7 @@ export function Contact() {
     setSubmitState({ type: null, message: '' });
 
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(contactEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +64,7 @@ export function Contact() {
       setSubmitState({
         type: 'error',
         message:
-          'Nao foi possivel enviar agora. Verifique a conexao com o webhook e tente novamente.',
+          'Nao foi possivel enviar agora. Tente novamente em instantes.',
       });
     } finally {
       setIsSubmitting(false);
@@ -208,6 +210,17 @@ export function Contact() {
               onSubmit={handleSubmit}
               className="w-full rounded-2xl border border-white/75 bg-white/84 p-5 shadow-lg backdrop-blur-md lg:flex lg:w-full lg:flex-col lg:justify-center lg:p-6"
             >
+              <input
+                type="text"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                className="hidden"
+                aria-hidden="true"
+              />
+
               <div className="mb-6 inline-flex w-fit rounded-full border border-[#3565AD]/20 bg-[#3565AD]/8 px-4 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-[#3565AD]">
                 LM2RODAS
               </div>

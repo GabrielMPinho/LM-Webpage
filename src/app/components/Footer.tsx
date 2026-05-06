@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,7 +20,7 @@ export function Footer() {
           <div>
             <div className="relative mb-6 flex h-28 w-[170px] items-center overflow-hidden sm:h-32 sm:w-[190px] md:h-[5.8rem] md:w-[270px]">
               <img
-                src="/logoFooter.png"
+                src={publicPath('logoFooter.png')}
                 alt="LM"
                 className="absolute left-1/2 top-1/2 h-[190%] max-w-none -translate-x-1/2 -translate-y-1/2 object-contain sm:h-[220%] md:h-[400%]"
               />

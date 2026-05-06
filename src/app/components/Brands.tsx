@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Bike } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 type Brand = {
   name: string;
@@ -106,7 +107,7 @@ function BrandCard({
     <div className="group relative flex h-full w-[15rem] flex-shrink-0 items-center justify-center rounded-2xl border border-white/75 bg-white/82 p-4 backdrop-blur-md transition-all duration-300 hover:border-[#3565AD] hover:shadow-xl md:w-[15.5rem] xl:w-[16rem]">
       <div className="flex h-[8.75rem] w-full items-center justify-center rounded-xl bg-white/72 px-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_12px_30px_rgba(12,32,65,0.05)]">
         <img
-          src={brand.logoSrc}
+          src={publicPath(brand.logoSrc)}
           alt={brand.logoAlt ?? `Logo ${brand.name}`}
           className={`object-contain ${brand.logoClassName ?? 'max-h-24 max-w-[10rem]'}`}
         />

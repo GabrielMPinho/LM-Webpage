@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Bike, Zap } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 function MotoOutline({
   className = '',
@@ -45,7 +46,7 @@ export function Hero() {
           playsInline
           className="absolute inset-0 h-full w-full scale-[1.35] object-cover object-[center_74%] md:scale-110 md:object-center"
         >
-          <source src="/videoHero.mp4" type="video/mp4" />
+          <source src={publicPath('videoHero.mp4')} type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/88 via-[#17355e]/66 to-[#3565AD]/40" />

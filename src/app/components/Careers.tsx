@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ArrowRight, Briefcase } from 'lucide-react';
+import { publicPath } from '../lib/public-path';
 
 export function Careers() {
   return (
@@ -21,7 +22,7 @@ export function Careers() {
             <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2.5 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm lg:p-3">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(41vh,24rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src="/warehouse/careers-office.jpeg"
+                  src={publicPath('warehouse/careers-office.jpeg')}
                   alt="Escritorio da LM"
                   className="h-full w-full object-cover object-[center_18%]"
                 />
@@ -36,7 +37,7 @@ export function Careers() {
             <div className="relative w-full overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_22px_55px_rgba(7,18,36,0.22)] backdrop-blur-sm">
               <div className="relative aspect-[16/9] overflow-hidden rounded-[1.2rem] sm:min-h-[15rem] lg:h-[min(30vh,14rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src="/warehouse/galpao4.jpg"
+                  src={publicPath('warehouse/galpao4.jpg')}
                   alt="Operação do galpao da LM"
                   className="h-full w-full object-cover object-center"
                 />
