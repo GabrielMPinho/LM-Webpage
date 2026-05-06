@@ -1,10 +1,13 @@
-import { motion } from 'motion/react';
-import { ArrowRight, Briefcase } from 'lucide-react';
-import { publicPath } from '../lib/public-path';
+import { motion } from "motion/react";
+import { ArrowRight, Briefcase } from "lucide-react";
+import { publicPath } from "../lib/public-path";
 
 export function Careers() {
   return (
-    <section id = "carreira" className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[78vh] lg:py-16">
+    <section
+      id="carreira"
+      className="lm-section lm-section-dark relative flex min-h-screen items-center py-10 lg:min-h-[78vh] lg:py-16"
+    >
       <div className="absolute inset-0 opacity-8">
         <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#3565AD] blur-3xl" />
         <div className="absolute bottom-0 left-0 h-96 w-96 rounded-full bg-[#326BB4] blur-3xl" />
@@ -22,7 +25,7 @@ export function Careers() {
             <div className="relative w-full overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-2.5 shadow-[0_30px_80px_rgba(7,18,36,0.28)] backdrop-blur-sm lg:p-3">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] sm:min-h-[22rem] lg:h-[min(41vh,24rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src={publicPath('warehouse/careers-office.jpeg')}
+                  src={publicPath("warehouse/careers-office.jpeg")}
                   alt="Escritorio da LM"
                   className="h-full w-full object-cover object-[center_18%]"
                 />
@@ -37,13 +40,11 @@ export function Careers() {
             <div className="relative w-full overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-2 shadow-[0_22px_55px_rgba(7,18,36,0.22)] backdrop-blur-sm">
               <div className="relative aspect-[16/9] overflow-hidden rounded-[1.2rem] sm:min-h-[15rem] lg:h-[min(30vh,14rem)] lg:min-h-0 lg:aspect-auto">
                 <img
-                  src={publicPath('warehouse/galpao4.jpg')}
+                  src={publicPath("warehouse/galpao4.jpg")}
                   alt="Operação do galpao da LM"
                   className="h-full w-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0C2041]/72 via-[#17355e]/28 to-transparent" />
-
-
               </div>
             </div>
           </motion.div>
@@ -63,7 +64,8 @@ export function Careers() {
             </div>
 
             <h2 className="mb-5 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              Faça Parte da <span className="lm-text-glow-blue">Nossa História</span>
+              Faça Parte da{" "}
+              <span className="lm-text-glow-blue">Nossa História</span>
             </h2>
 
             <p className="mb-6 text-base leading-relaxed text-white/80 md:text-lg">
@@ -78,7 +80,9 @@ export function Careers() {
             <div className="mb-8 space-y-3 md:mb-10 md:space-y-4">
               <div className="flex items-start gap-3">
                 <div className="mt-2 h-2 w-2 rounded-full bg-[#3565AD]" />
-                <p className="text-white/90">Ambiente colaborativo e inclusivo</p>
+                <p className="text-white/90">
+                  Ambiente colaborativo e inclusivo
+                </p>
               </div>
               <div className="flex items-start gap-3">
                 <div className="mt-2 h-2 w-2 rounded-full bg-[#3565AD]" />
